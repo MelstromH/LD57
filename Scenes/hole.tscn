@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://bimxiu4qal2jp"]
+[gd_scene load_steps=43 format=4 uid="uid://bimxiu4qal2jp"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -7,12 +7,13 @@
 [ext_resource type="Script" path="res://Scripts/Player/character_body_2d.gd" id="2_h45im"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="2_p0klu"]
 [ext_resource type="Script" path="res://Scripts/Player/character_data.gd" id="4_054vt"]
-[ext_resource type="PackedScene" path="res://wind_particle.tscn" id="5_xlf4n"]
+[ext_resource type="PackedScene" uid="uid://dr4l0atc0ddwp" path="res://wind_particle.tscn" id="5_xlf4n"]
 [ext_resource type="Texture2D" uid="uid://5px6c1llsvl7" path="res://Sprites/Lizard/32_BH_Walk_Strip_10.png" id="6_jrby7"]
 [ext_resource type="Texture2D" uid="uid://b5lt4j24d0xlh" path="res://Sprites/Lizard/32_BH_Run_Strip_8.png" id="6_su8xx"]
 [ext_resource type="Script" path="res://Scripts/Player/animation_state.gd" id="8_md2yt"]
-[ext_resource type="Script" path="res://Scenes/wind.gd" id="11_f62tx"]
+[ext_resource type="Script" path="res://Scripts/Level/wind.gd" id="11_f62tx"]
 [ext_resource type="AudioStream" uid="uid://d214j3nd33vok" path="res://LD57 Radiation Detection.wav" id="11_p23if"]
+[ext_resource type="Script" path="res://Scripts/Player/ladder_spawn.gd" id="12_mafti"]
 [ext_resource type="AudioStream" uid="uid://crvceqtv1ofv3" path="res://438856__craigsmith__g55-02-chill-wind.wav" id="13_sccyl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvucq"]
@@ -377,44 +378,50 @@ radius = 7.07107
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbwcd"]
 radius = 5.09902
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opqj2"]
+size = Vector2(10, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6xb"]
+size = Vector2(10, 63)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("player")]
-tile_map_data = PackedByteArray("AAAAAAMAAAAGAAIAAAABAAMAAAAEAAAAAAACAAMAAAAEAAAAAAADAAMAAAAEAAAAAAAEAAMAAAAEAAAAAAAFAAMAAAAEAAAAAAAGAAMAAAAEAAAAAAAHAAMAAAAEAAAAAAAIAAMAAAAEAAAAAAAJAAMAAAAEAAAAAAAKAAMAAAAEAAAAAAALAAMAAAAEAAAAAAAMAAMAAAAEAAAAAAANAAMAAAAEAAAAAAAOAAMAAAAEAAAAAAAPAAMAAAAEAAAAAAAQAAMAAAAEAAAAAAARAAMAAAAEAAAAAAASAAMAAAAEAAAAAAATAAMAAAAEAAAAAAAUAAMAAAAEAAAAAAAVAAMAAAAEAAAAAAAWAAMAAAAEAAAAAAAXAAMAAAAEAAAAAAAYAAMAAAAEAAAAAAAZAAMAAAAEAAAAAAAaAAMAAAAEAAAAAAAbAAMAAAAEAAAAAAAcAAMAAAAEAAAAAAAdAAMAAAAEAAAAAAAeAAMAAAAEAAAAAAAfAAMAAAAEAAAAAAAgAAMAAAAEAAAAAAAhAAMAAAAEAAAAAAAiAAMAAAAEAAAAAAAjAAMAAAAEAAAAAAAkAAMAAAAEAAAAAAAlAAMAAAAEAAAAAAAmAAMAAAAEAAAAAAAnAAMAAAAEAAAAAAAoAAMAAAAEAAAAAAApAAMAAAAEAAAAAAAqAAMAAAAEAAAAAAArAAMAAAAEAAAAAAAsAAMAAAAEAAAAAAAtAAMAAAAEAAAAAAAuAAMAAAAEAAAAAAAvAAMAAAAEAAAAAAAwAAMAAAAEAAAAAAAxAAMAAAAEAAAAAAAyAAMAAAAEAAAAAAAzAAMAAAAEAAAAAAA0AAMAAAAEAAAAAAA1AAMAAAAEAAAAAAA2AAMAAAAEAAAAAAA3AAMAAAAEAAAAAAA4AAMAAAAEAAAAAAA5AAMAAAAEAAAAAAA6AAMAAAAEAAAAAAA7AAMAAAAEAAAAAAA8AAMAAAAEAAAAAABbAAMAAAAEAAAAAABaAAMAAAAEAAAAAABZAAMAAAAEAAAAAABYAAMAAAAEAAAAAABXAAMAAAAEAAAAAABWAAMAAAAEAAAAAABVAAMAAAAEAAAAAABUAAMAAAAEAAAAAABTAAMAAAAEAAAAAABSAAMAAAAEAAAAAABRAAMAAAAEAAAAAABQAAMAAAAEAAAAAABPAAMAAAAEAAAAAABOAAMAAAAEAAAAAABNAAMAAAAEAAAAAABMAAMAAAAEAAAAAABLAAMAAAAEAAAAAABKAAMAAAAEAAAAAABJAAMAAAAEAAAAAABIAAMAAAAEAAAAAABHAAMAAAAEAAAAAABGAAMAAAAEAAAAAABFAAMAAAAEAAAAAABEAAMAAAAEAAAAAABDAAMAAAAEAAAAAABCAAMAAAAEAAAAAABBAAMAAAAEAAAAAABAAAMAAAAEAAAAAAA/AAMAAAAEAAAAAAA+AAMAAAAEAAAAAAA9AAMAAAAEAAAAAABiAAMAAAAHAAIAAABhAAMAAAAEAAAAAABgAAMAAAAEAAAAAABfAAMAAAAEAAAAAABeAAMAAAAEAAAAAABdAAMAAAAEAAAAAABcAAMAAAAEAAAAAAAvAAcAAAACAAIAAAAwAAgAAAABAAIAAAAxAAUAAAACAAEAAAAxAAgAAAABAAIAAAAyAAgAAAABAAIAAAAzAAgAAAABAAIAAAA0AAUAAAACAAEAAAA0AAgAAAABAAIAAAA1AAgAAAACAAEAAAA2AAcAAAACAAEAAAAnAAAAAAAAAAMAAAAnAAEAAAAAAAQAAAAnAAIAAAAAAAUAAAA=")
+tile_map_data = PackedByteArray("AAAAAAMAAAAGAAIAAAABAAMAAAAEAAAAAAACAAMAAAAEAAAAAAADAAMAAAAEAAAAAAAEAAMAAAAEAAAAAAAFAAMAAAAEAAAAAAAGAAMAAAAEAAAAAAAHAAMAAAAEAAAAAAAIAAMAAAAEAAAAAAAJAAMAAAAEAAAAAAAKAAMAAAAEAAAAAAALAAMAAAAEAAAAAAAMAAMAAAAEAAAAAAANAAMAAAAEAAAAAAAOAAMAAAAEAAAAAAAPAAMAAAAEAAAAAAAQAAMAAAAEAAAAAAARAAMAAAAEAAAAAAASAAMAAAAEAAAAAAATAAMAAAAEAAAAAAAUAAMAAAAEAAAAAAAVAAMAAAAEAAAAAAAWAAMAAAAEAAAAAAAXAAMAAAAEAAAAAAAYAAMAAAAEAAAAAAAZAAMAAAAEAAAAAAAaAAMAAAAEAAAAAAAbAAMAAAAEAAAAAAAcAAMAAAAEAAAAAAAdAAMAAAAEAAAAAAAeAAMAAAAEAAAAAAAfAAMAAAAEAAAAAAAgAAMAAAAEAAAAAAAhAAMAAAAEAAAAAAAiAAMAAAAEAAAAAAAjAAMAAAAEAAAAAAAkAAMAAAAEAAAAAAAlAAMAAAAEAAAAAAAmAAMAAAAEAAAAAAAnAAMAAAAEAAAAAAAoAAMAAAAEAAAAAAApAAMAAAAEAAAAAAAqAAMAAAAEAAAAAAArAAMAAAAEAAAAAAAsAAMAAAAEAAAAAAAtAAMAAAAEAAAAAAAuAAMAAAAEAAAAAAAvAAMAAAAEAAAAAAAwAAMAAAAEAAAAAAAxAAMAAAAEAAAAAAAyAAMAAAAEAAAAAAAzAAMAAAAEAAAAAAA0AAMAAAAEAAAAAAA1AAMAAAAEAAAAAAA2AAMAAAAEAAAAAAA3AAMAAAAIAAEAAABbAAMAAAAEAAAAAABaAAMAAAAEAAAAAABZAAMAAAAEAAAAAABYAAMAAAAEAAAAAABXAAMAAAAEAAAAAABWAAMAAAAEAAAAAABVAAMAAAAEAAAAAABUAAMAAAAEAAAAAABTAAMAAAAEAAAAAABSAAMAAAAEAAAAAABRAAMAAAAEAAAAAABQAAMAAAAEAAAAAABPAAMAAAAEAAAAAABOAAMAAAAEAAAAAABNAAMAAAAEAAAAAABMAAMAAAAEAAAAAABLAAMAAAAEAAAAAABKAAMAAAAEAAAAAABJAAMAAAAEAAAAAABIAAMAAAAEAAAAAABHAAMAAAAEAAAAAABGAAMAAAAEAAAAAABFAAMAAAAEAAAAAABEAAMAAAAEAAAAAABDAAMAAAAEAAAAAABCAAMAAAAEAAAAAABBAAMAAAAEAAAAAABAAAMAAAAEAAAAAAA/AAMAAAAEAAAAAAA+AAMAAAAEAAAAAABiAAMAAAAHAAIAAABhAAMAAAAEAAAAAABgAAMAAAAEAAAAAABfAAMAAAAEAAAAAABeAAMAAAAEAAAAAABdAAMAAAAEAAAAAABcAAMAAAAEAAAAAAAvAAcAAAACAAIAAAAwAAgAAAABAAIAAAAxAAUAAAACAAEAAAAxAAgAAAABAAIAAAAyAAgAAAABAAIAAAAzAAgAAAABAAIAAAA0AAUAAAACAAEAAAA0AAgAAAABAAIAAAA1AAgAAAACAAEAAAAnAAAAAAAAAAMAAAAnAAEAAAAAAAQAAAAnAAIAAAAAAAUAAAA4AAMAAAAHAAIAAAA4AAYAAAAEAAAAAAA5AAYAAAAEAAAAAAA6AAYAAAAEAAAAAAA7AAYAAAAHAAIAAAA3AAYAAAAIAAEAAAA3AAUAAAAGAAEAAAA3AAQAAAAGAAEAAAAhAAAAAAAHAAIAAAAgAAAAAAAEAAAAAAAfAAAAAAAEAAAAAAAeAAAAAAAGAAIAAAAdAP7/AAAHAAIAAAAcAP7/AAAEAAAAAAAbAP7/AAAEAAAAAAAaAP7/AAAGAAIAAAA=")
 tile_set = SubResource("TileSet_gwmp5")
 script = ExtResource("2_0djjo")
 player = NodePath("../Player")
 width = 99
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(783, 17)
+position = Vector2(584, 30)
 
 [node name="Hearts" type="Node2D" parent="Camera2D"]
-position = Vector2(25, 12)
+position = Vector2(-99, -87)
 script = ExtResource("2_p0klu")
 
 [node name="Heart1" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-155.92, -72.92)
+position = Vector2(-25.92, -0.919998)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart2" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-142.92, -72.92)
+position = Vector2(-12.92, -0.919998)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart3" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-129.84, -72.84)
+position = Vector2(0.160004, -0.839996)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart4" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-116.84, -72.84)
+position = Vector2(13.16, -0.839996)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart5" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-103.84, -72.84)
+position = Vector2(26.16, -0.839996)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
@@ -433,7 +440,8 @@ position = Vector2(5.69, 0)
 position = Vector2(7.455, 0)
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tile_map")]
-position = Vector2(787, 12)
+position = Vector2(584, 30)
+collision_layer = 8
 script = ExtResource("2_h45im")
 BASE_JUMP_VELOCITY = -50
 friction = 0.05
@@ -462,7 +470,6 @@ script = ExtResource("4_054vt")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 z_index = -1
-position = Vector2(-4, 5)
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 update_scale = false
@@ -474,6 +481,29 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/ShelterDetector"]
 shape = SubResource("CircleShape2D_pbwcd")
+
+[node name="LadderSpawn" type="Node2D" parent="Player"]
+position = Vector2(12, 10)
+script = ExtResource("12_mafti")
+
+[node name="Ladder" type="CharacterBody2D" parent="Player/LadderSpawn"]
+collision_layer = 4
+
+[node name="LadderSprite" type="Sprite2D" parent="Player/LadderSpawn/Ladder"]
+position = Vector2(0, -26.44)
+scale = Vector2(0.08, 0.493125)
+texture = ExtResource("2_ej8y6")
+
+[node name="Area2D" type="Area2D" parent="Player/LadderSpawn/Ladder"]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LadderSpawn/Ladder/Area2D"]
+position = Vector2(0, -26.5)
+shape = SubResource("RectangleShape2D_opqj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LadderSpawn/Ladder"]
+position = Vector2(0, -26.5)
+shape = SubResource("RectangleShape2D_rc6xb")
 
 [node name="Wind" type="Node" parent="." node_paths=PackedStringArray("wind_effect")]
 script = ExtResource("11_f62tx")
@@ -489,5 +519,7 @@ stream = ExtResource("13_sccyl")
 [connection signal="body_shape_exited" from="Player/MantleDetector" to="Player" method="_on_mantle_detector_body_shape_exited"]
 [connection signal="body_shape_entered" from="Player/ShelterDetector" to="Player/StateContainer" method="_on_shelter_detector_body_shape_entered"]
 [connection signal="body_shape_exited" from="Player/ShelterDetector" to="Player/StateContainer" method="_on_shelter_detector_body_shape_exited"]
+[connection signal="body_entered" from="Player/LadderSpawn/Ladder/Area2D" to="Player/LadderSpawn" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Player/LadderSpawn/Ladder/Area2D" to="Player/LadderSpawn" method="_on_area_2d_body_exited"]
 [connection signal="finished" from="Wind/Alarm" to="Wind" method="_on_alarm_finished"]
 [connection signal="finished" from="Wind/WindSound" to="Wind" method="_on_wind_sound_finished"]

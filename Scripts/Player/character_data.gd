@@ -10,6 +10,8 @@ var in_shelter : bool = false
 var rad_timer : int = 0
 var rad_threshold : int = 240
 
+var on_ladder = false
+
 var gravity_multiplier = 1
 	
 func subscribe_health(listener: Node) :

@@ -1,6 +1,4 @@
 extends CharacterBody2D
-
-
 #animation
 @onready var animation_controller = $AnimatedSprite2D
 var character_state = PlayerState.CharacterState.Standing
@@ -23,14 +21,19 @@ var momentum = 0;
 #other nodes
 @export var tile_map : TileMapLayer
 @onready var state_container = $StateContainer
+@onready var ladder_spawn = $"LadderSpawn"
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() && not state_container.on_ladder:
 		velocity += get_gravity() * delta * state_container.gravity_multiplier
+	else : 
+		velocity.y = 50
+		
 	# Handle jump.
 
-	if Input.is_action_just_pressed("ui_accept") and ( is_on_floor() || can_mantle) :
+	if Input.is_action_just_pressed("Jump") and ( is_on_floor() || can_mantle) :
 		if can_mantle : 
 			actual_jump_velocity = BASE_JUMP_VELOCITY * 4
 		else : 
@@ -44,8 +47,13 @@ func _physics_process(delta: float) -> void:
 			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	if state_container.on_ladder && Input.is_action_pressed("Climb") :
+		velocity.y = -50
+		
+		print(velocity.y)
+
 	
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("Left", "Right")
 
 	if direction:
 		#make sure character isn't going too fast
@@ -76,10 +84,12 @@ func _physics_process(delta: float) -> void:
 	set_direction_facing(direction)
 	
 	detect_fall_damage()
-	
-	
 	velocity.x = (SPEED * momentum) 
 	move_and_slide()
+	
+	if Input.is_action_just_released("Ladder") : 
+		ladder_spawn.handle_ladder()
+	
 	
 func set_direction_facing(direction_input: int) :
 	if direction_input && direction_facing != direction_input :
@@ -87,12 +97,12 @@ func set_direction_facing(direction_input: int) :
 		direction_facing = direction_input
 		
 func detect_fall_damage() :
-	if velocity.y - previous_frame_falling_speed < -100  :
-		var damage : int = previous_frame_falling_speed / 100
+	if velocity.y - previous_frame_falling_speed < -150  :
+		var damage : int = previous_frame_falling_speed / 150
 		
 		state_container.damage(damage)
 	
-	previous_frame_falling_speed = velocity.y	
+	previous_frame_falling_speed = velocity.y
 	
 	if velocity.y > 500 : 
 		state_container.damage(5)
@@ -111,4 +121,5 @@ func _on_mantle_detector_body_shape_exited(body_rid: RID, body: Node2D, body_sha
 
 	if tile && tile.get_custom_data("Mantleable") == true :
 		can_mantle = false
+		
 		
