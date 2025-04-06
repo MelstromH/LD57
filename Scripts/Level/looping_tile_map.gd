@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	if not Engine.is_editor_hint() :
 		middle_index = local_to_map(player.position)
 		
-		if middle_index.x > width * 0.75 :
+		if middle_index.x > width * 0.75 + 1 :
 			
 			print(middle_index.x)
 			var new_pos = Vector2i(width * 0.25, middle_index.y)
@@ -26,9 +26,8 @@ func _process(delta: float) -> void:
 			
 			
 		
-		if middle_index.x < width * 0.25 :
+		if middle_index.x < width * 0.25 - 1 :
 			print(middle_index.x)
-			#print(width)
 			var new_pos = Vector2i(width * 0.75, middle_index.y)
 			player.position = Vector2i(map_to_local(new_pos).x, player.position.y)
 

@@ -370,30 +370,31 @@ width = 99
 position = Vector2(81, 16)
 
 [node name="Hearts" type="Node2D" parent="Camera2D"]
+position = Vector2(25, 12)
 script = ExtResource("2_p0klu")
 
 [node name="Heart1" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-167, -78)
+position = Vector2(-155.92, -72.92)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart2" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-154, -78)
+position = Vector2(-142.92, -72.92)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart3" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-140.92, -77.92)
+position = Vector2(-129.84, -72.84)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart4" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-127.92, -77.92)
+position = Vector2(-116.84, -72.84)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
 [node name="Heart5" type="Sprite2D" parent="Camera2D/Hearts"]
-position = Vector2(-114.92, -77.92)
+position = Vector2(-103.84, -72.84)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
@@ -430,6 +431,11 @@ z_index = -1
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 update_scale = false
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+position = Vector2(-81, -16)
+
+[node name="Wind" type="Node" parent="."]
 
 [connection signal="body_shape_entered" from="Player/MantleDetector" to="Player" method="_on_mantle_detector_body_shape_entered"]
 [connection signal="body_shape_exited" from="Player/MantleDetector" to="Player" method="_on_mantle_detector_body_shape_exited"]
