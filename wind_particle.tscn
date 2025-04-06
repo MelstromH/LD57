@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr4l0atc0ddwp"]
+
+[sub_resource type="Curve" id="Curve_rlfpk"]
+_data = [Vector2(0.011236, 1), 0.0, 0.0, 0, 0, Vector2(0.640449, 0.802198), -0.782418, -0.782418, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="WindParticle" type="CPUParticles2D"]
+scale = Vector2(13.56, 1)
+amount = 10
+lifetime = 4.0
+randomness = 0.5
+lifetime_randomness = 0.09
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, -300)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_rlfpk")
