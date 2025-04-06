@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bimxiu4qal2jp"]
+[gd_scene load_steps=40 format=4 uid="uid://bimxiu4qal2jp"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/character_body_2d.gd" id="2_h45im"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="2_p0klu"]
 [ext_resource type="Script" path="res://Scripts/Player/character_data.gd" id="4_054vt"]
+[ext_resource type="PackedScene" path="res://wind_particle.tscn" id="5_xlf4n"]
 [ext_resource type="Texture2D" uid="uid://5px6c1llsvl7" path="res://Sprites/Lizard/32_BH_Walk_Strip_10.png" id="6_jrby7"]
 [ext_resource type="Texture2D" uid="uid://b5lt4j24d0xlh" path="res://Sprites/Lizard/32_BH_Run_Strip_8.png" id="6_su8xx"]
 [ext_resource type="Script" path="res://Scripts/Player/animation_state.gd" id="8_md2yt"]
@@ -386,7 +387,7 @@ player = NodePath("../Player")
 width = 99
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(787, 12)
+position = Vector2(783, 17)
 
 [node name="Hearts" type="Node2D" parent="Camera2D"]
 position = Vector2(25, 12)
@@ -417,10 +418,19 @@ position = Vector2(-103.84, -72.84)
 scale = Vector2(0.095, 0.095)
 texture = ExtResource("2_ej8y6")
 
-[node name="WindSprite" type="Sprite2D" parent="Camera2D"]
+[node name="wind" type="Node2D" parent="Camera2D"]
 visible = false
-position = Vector2(92, -52)
-texture = ExtResource("2_ej8y6")
+
+[node name="WindParticle" parent="Camera2D/wind" instance=ExtResource("5_xlf4n")]
+
+[node name="WindParticle2" parent="Camera2D/wind" instance=ExtResource("5_xlf4n")]
+position = Vector2(3.33, 0)
+
+[node name="WindParticle3" parent="Camera2D/wind" instance=ExtResource("5_xlf4n")]
+position = Vector2(5.69, 0)
+
+[node name="WindParticle4" parent="Camera2D/wind" instance=ExtResource("5_xlf4n")]
+position = Vector2(7.455, 0)
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("tile_map")]
 position = Vector2(787, 12)
@@ -452,6 +462,7 @@ script = ExtResource("4_054vt")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 z_index = -1
+position = Vector2(-4, 5)
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 update_scale = false
@@ -464,9 +475,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/ShelterDetector"]
 shape = SubResource("CircleShape2D_pbwcd")
 
-[node name="Wind" type="Node" parent="." node_paths=PackedStringArray("wind_sprite")]
+[node name="Wind" type="Node" parent="." node_paths=PackedStringArray("wind_effect")]
 script = ExtResource("11_f62tx")
-wind_sprite = NodePath("../Camera2D/WindSprite")
+wind_effect = NodePath("../Camera2D/wind")
 
 [node name="Alarm" type="AudioStreamPlayer" parent="Wind"]
 stream = ExtResource("11_p23if")
