@@ -27,7 +27,7 @@ var momentum = 0;
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * state_container.gravity_multiplier
 	# Handle jump.
 
 	if Input.is_action_just_pressed("ui_accept") and ( is_on_floor() || can_mantle) :

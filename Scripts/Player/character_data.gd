@@ -9,6 +9,8 @@ var in_wind : bool = false
 var in_shelter : bool = false
 var rad_timer : int = 0
 var rad_threshold : int = 240
+
+var gravity_multiplier = 1
 	
 func subscribe_health(listener: Node) :
 	health_listeners.append(listener)
@@ -40,3 +42,18 @@ func handle_radiation() :
 	
 	if in_shelter || not in_wind : 
 		rad_timer = 0
+
+
+func _on_shelter_detector_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	
+	in_shelter = true
+	
+	print("shelter")
+	pass # Replace with function body.
+
+
+func _on_shelter_detector_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	print("no shelter") 
+	in_shelter = false
+	
+	pass # Replace with function body.

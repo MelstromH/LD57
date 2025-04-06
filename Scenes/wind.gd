@@ -16,6 +16,8 @@ func _ready() :
 	alarm_sound = $Alarm
 	wind_sound = $WindSound
 	player_state = get_node("%StateContainer")
+	
+	activate_wind()
 
 func _process(float) : 
 	
@@ -34,13 +36,14 @@ func trigger_wind() :
 
 func activate_wind() :
 	wind_sound.play()
-	
+	player_state.gravity_multiplier = 0.5
 	wind_sprite.visible = true
 	pass
 	
 func deactivate_wind() : 
 	player_state.in_wind = false
 	wind_sprite.visible = false
+	player_state.gravity_multiplier = 1
 	pass
 	
 func _on_alarm_finished() -> void:
