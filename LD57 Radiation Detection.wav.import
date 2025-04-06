@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d214j3nd33vok"
+path="res://.godot/imported/LD57 Radiation Detection.wav-5981882acf89d3fe2fbd63e220644cf7.sample"
+
+[deps]
+
+source_file="res://LD57 Radiation Detection.wav"
+dest_files=["res://.godot/imported/LD57 Radiation Detection.wav-5981882acf89d3fe2fbd63e220644cf7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
