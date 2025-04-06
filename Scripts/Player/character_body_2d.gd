@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 #animation
-enum CharacterState {Standing, Stopping, Starting, Walking, Running, Jumping}
-var character_state = CharacterState.Standing
+@onready var animation_controller = $AnimatedSprite2D
+var character_state = PlayerState.CharacterState.Standing
 var direction_facing = 1
 
 #vertical
@@ -28,18 +28,20 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 	# Handle jump.
+
 	if Input.is_action_just_pressed("ui_accept") and ( is_on_floor() || can_mantle) :
 		if can_mantle : 
 			actual_jump_velocity = BASE_JUMP_VELOCITY * 4
 		else : 
 			actual_jump_velocity = BASE_JUMP_VELOCITY
+			animation_controller.set_state(PlayerState.CharacterState.Jumping)
 	
 		if  abs(momentum) >= (momentum_max * 0.8) && !can_mantle : 
 			velocity.y = actual_jump_velocity * 1.3
 		else :
 			velocity.y = actual_jump_velocity
+			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	
@@ -52,13 +54,13 @@ func _physics_process(delta: float) -> void:
 			momentum += (direction/10) * ( abs(momentum)/momentum_damping + 0.1)
 			#character state stuff for animations
 			if momentum > 2 || momentum < -2 :
-				character_state = CharacterState.Running
+				animation_controller.set_state(PlayerState.CharacterState.Running)
 			else : 
-				character_state = CharacterState.Walking
+				animation_controller.set_state(PlayerState.CharacterState.Walking)
 				
 		else :
 			momentum = move_toward(momentum, 0, friction)
-			character_state = CharacterState.Stopping
+			animation_controller.set_state(PlayerState.CharacterState.Stopping)
 		
 		momentum = clamp(momentum, -2.5, 2.5)
 		
@@ -66,9 +68,9 @@ func _physics_process(delta: float) -> void:
 		momentum = move_toward(momentum, 0, friction)
 		
 		if momentum == 0 :
-			character_state = CharacterState.Standing
+			animation_controller.set_state(PlayerState.CharacterState.Standing)
 		else :
-			character_state = CharacterState.Stopping
+			animation_controller.set_state(PlayerState.CharacterState.Stopping)
 			
 	#character facing direction
 	set_direction_facing(direction)
