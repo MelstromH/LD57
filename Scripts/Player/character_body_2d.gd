@@ -89,15 +89,16 @@ func _physics_process(delta: float) -> void:
 		ladder_spawn.handle_ladder()
 
 func handle_jump() :
-		
+	
+	
 	if can_mantle : 
 		momentum = 0
 		animation_controller.set_state(PlayerState.CharacterState.Mantling)
 		position = mantle_location.global_position
 	else : 
-		actual_jump_velocity = BASE_JUMP_VELOCITY
-
-	if  abs(momentum) >= (momentum_max * 0.8) && !can_mantle : 
+		actual_jump_velocity = BASE_JUMP_VELOCITY	
+		
+	if  abs(momentum) >= (momentum_max * 0.7) && !can_mantle : 
 		animation_controller.set_state(PlayerState.CharacterState.LongJumpStarting)
 		momentum = momentum * 0.7
 		await animation_controller.wait_for_animation()
@@ -110,8 +111,8 @@ func handle_jump() :
 	elif !can_mantle :
 		animation_controller.set_state(PlayerState.CharacterState.Hopping)
 		await animation_controller.wait_for_animation()
-		if is_on_floor() && velocity && actual_jump_velocity:
-			velocity.y = actual_jump_velocity
+		if is_on_floor() && velocity != null && actual_jump_velocity:
+			velocity.y = actual_jump_velocity * 1.
 		
 	
 func set_direction_facing(direction_input: int) :
