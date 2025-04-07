@@ -18,7 +18,7 @@ var climbed = false
 
 var gravity_multiplier = 1
 
-var default_scraps = 0
+@export var default_scraps = 3
 var number_scraps = 0
 @export var scrap_ladder_threshold = 3
 var last_grounded_location : Vector2
@@ -53,8 +53,9 @@ func _ready() :
 	
 func reset() :
 	
-	get_parent().position = spawn_point.global_position
+	print("RESET")
 	
+	get_parent().position = spawn_point.global_position
 	var bone_instance = bone_pile_scene.instantiate()
 	add_child(bone_instance)
 	bone_instance.player_state = self
@@ -80,7 +81,7 @@ func damage(dmg : int) :
 			listener.update_health(current_health)
 		return
 	
-	print("damage")
+	print("damage: " + str(dmg) + " health: " + str(current_health))
 	current_health -= dmg
 	
 	for listener in health_listeners :

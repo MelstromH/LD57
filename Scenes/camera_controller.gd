@@ -9,7 +9,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if moving_toward_player && player:
-		print("MOVING")
 		position = position.move_toward(player.position, delta * speed)
 		
 	if  moving_toward_player && player && position.distance_to(player.position) < 2 :

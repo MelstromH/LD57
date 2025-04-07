@@ -150,7 +150,7 @@ func detect_fall_damage() :
 		
 	
 	if velocity.y - previous_frame_falling_speed < -180 && previous_frame_falling_speed > 0 :
-		var damage : int = previous_frame_falling_speed / 200
+		var damage : int = previous_frame_falling_speed / 180
 		
 		momentum = 0
 		
@@ -167,7 +167,11 @@ func detect_fall_damage() :
 	previous_frame_falling_speed = velocity.y
 	
 	if velocity.y > 500 : 
+		momentum = 0
+		velocity.y = 0
+		previous_frame_falling_speed = 0
 		state_container.damage(5)
+		state_container.last_grounded_location = null
 
 	
 func _on_mantle_detector_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

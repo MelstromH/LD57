@@ -1056,6 +1056,7 @@ stream = ExtResource("25_3kcyi")
 
 [node name="Wind" type="Node" parent="." node_paths=PackedStringArray("wind_effect")]
 script = ExtResource("11_f62tx")
+interval_max = 1000
 wind_effect = NodePath("../Camera2D/wind")
 
 [node name="Alarm" type="AudioStreamPlayer" parent="Wind"]
