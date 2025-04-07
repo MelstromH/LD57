@@ -9,7 +9,7 @@ size = Vector2(20, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sgv6"]
 size = Vector2(20, 7.5)
 
-[node name="Skeleton" type="CharacterBody2D"]
+[node name="BonePile" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_26ntr")
 
