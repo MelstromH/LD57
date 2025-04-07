@@ -10,28 +10,49 @@ var in_shelter : bool = false
 var rad_timer : int = 0
 var rad_threshold : int = 240
 
+var starting_pos : Vector2
+
 var on_ladder = false
 var climbed = false
 
 var gravity_multiplier = 1
 
+var default_scraps = 0
 var number_scraps = 0
 @export var scrap_ladder_threshold = 3
+
+var grace_period = false
 	
 func subscribe_health(listener: Node) :
 	health_listeners.append(listener)
 
 func _ready() :
+	
 	current_health = max_health
+	number_scraps = default_scraps
+	starting_pos = get_parent().position
+	for listener in health_listeners :
+		listener.update_health(current_health)
+		
+	await get_tree().create_timer(1).timeout
+		
+	
+func reset() :
+	get_parent().position = starting_pos
+	current_health = max_health
+	number_scraps = default_scraps
+	print("reset")
 	
 func damage(dmg : int) :
+	print("damage")
 	current_health -= dmg
 	
 	for listener in health_listeners :
 		listener.update_health(current_health)
 		
 	if current_health <= 0 :
-		get_tree().reload_current_scene()
+		reset()
+		grace_period = true
 		
 func _process(delta: float) -> void:
 	
