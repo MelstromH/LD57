@@ -43,7 +43,7 @@ func die() :
 func handle_ladder() : 
 	
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x, -15))
+	var query = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x, -8))
 	
 	var result = space_state.intersect_ray(query)
 	
