@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://da23eut0kdsmm"
-path="res://.godot/imported/LD57 walk past save point.wav-02a75f2ea4b2231625a7619296f59ff9.sample"
+path="res://.godot/imported/LD57 walk past save point.wav-f804be26e65cc8c4cdc2f26245abe51f.sample"
 
 [deps]
 
-source_file="res://Sound/LD57 walk past save point.wav"
-dest_files=["res://.godot/imported/LD57 walk past save point.wav-02a75f2ea4b2231625a7619296f59ff9.sample"]
+source_file="res://Sound/Player/LD57 walk past save point.wav"
+dest_files=["res://.godot/imported/LD57 walk past save point.wav-f804be26e65cc8c4cdc2f26245abe51f.sample"]
 
 [params]
 
