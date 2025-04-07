@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 			crumble_timer = 0
 	
 	
-	
 func die() :
 	hide_ladder()
 

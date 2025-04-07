@@ -13,7 +13,7 @@ func _ready() :
 	state_container.subscribe_health(self)
 	
 func update_health(current_health : int) :
-	for i in 5 :
+	for i in 3 :
 		if i > current_health - 1 :
 			hearts[i].set_texture(EMPTY_HEART)
 			#hearts[i].visible = false

@@ -820,6 +820,22 @@ texture = ExtResource("4_bpgvt")
 position = Vector2(26.16, -0.839996)
 texture = ExtResource("4_bpgvt")
 
+[node name="Bones" type="Node2D" parent="Camera2D"]
+position = Vector2(133.845, -64)
+script = ExtResource("2_p0klu")
+
+[node name="Bone1" type="Sprite2D" parent="Camera2D/Bones"]
+position = Vector2(-25.92, -0.919998)
+texture = ExtResource("4_bpgvt")
+
+[node name="Bone2" type="Sprite2D" parent="Camera2D/Bones"]
+position = Vector2(-12.92, -0.919998)
+texture = ExtResource("4_bpgvt")
+
+[node name="Bone3" type="Sprite2D" parent="Camera2D/Bones"]
+position = Vector2(0.160004, -0.839996)
+texture = ExtResource("4_bpgvt")
+
 [node name="wind" type="Node2D" parent="Camera2D"]
 visible = false
 
