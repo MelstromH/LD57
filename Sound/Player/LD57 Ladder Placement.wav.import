@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr8q4hl6erkvp"
+path="res://.godot/imported/LD57 Ladder Placement.wav-215b7e32e5c3e1d25676315a328bd33b.sample"
+
+[deps]
+
+source_file="res://Sound/Player/LD57 Ladder Placement.wav"
+dest_files=["res://.godot/imported/LD57 Ladder Placement.wav-215b7e32e5c3e1d25676315a328bd33b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
