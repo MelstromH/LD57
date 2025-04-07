@@ -1,12 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-[gd_scene load_steps=118 format=4 uid="uid://bimxiu4qal2jp"]
-=======
-[gd_scene load_steps=108 format=4 uid="uid://bimxiu4qal2jp"]
->>>>>>> Stashed changes
-=======
-[gd_scene load_steps=108 format=4 uid="uid://bimxiu4qal2jp"]
->>>>>>> Stashed changes
+[gd_scene load_steps=119 format=4 uid="uid://bw26kubkcvn57"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
