@@ -42,13 +42,16 @@ func _ready() :
 		listener.update_health(current_health)
 	
 func reset() :
+	
+	get_parent().position = starting_pos
+	
 	var bone_instance = bone_pile_scene.instantiate()
 	add_child(bone_instance)
 	bone_instance.player_state = self
 	bone_instance.position = last_grounded_location
 	bone_instance.top_level = true
 	
-	get_parent().position = starting_pos
+	
 	current_health = max_health
 	number_scraps = default_scraps
 	
