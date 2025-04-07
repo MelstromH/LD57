@@ -136,7 +136,6 @@ func detect_fall_damage() :
 	elif velocity.y - previous_frame_falling_speed < -50 && previous_frame_falling_speed > 0 : 
 		animation_controller.soft.play()
 	
-		
 	previous_frame_falling_speed = velocity.y
 	
 	if velocity.y > 500 : 

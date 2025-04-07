@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cyce77y6122xv"
+path="res://.godot/imported/LD57 Foot step 1.wav-2d757d7bbd4a4dcbc0d2cc01e29c979c.sample"
+
+[deps]
+
+source_file="res://Sound/Player/LD57 Foot step 1.wav"
+dest_files=["res://.godot/imported/LD57 Foot step 1.wav-2d757d7bbd4a4dcbc0d2cc01e29c979c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

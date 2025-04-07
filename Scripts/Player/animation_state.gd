@@ -5,13 +5,27 @@ var current_state : PlayerState.CharacterState = PlayerState.CharacterState.Stan
 var locked = false
 var lethal_sound : AudioStreamPlayer
 
+var footstep_interval = 100
+var footstep_timer = 0
+
 @onready var hard: AudioStreamPlayer = $"../Sounds/Hard"
 @onready var soft: AudioStreamPlayer = $"../Sounds/Soft"
+@onready var foot: AudioStreamPlayer = $"../Sounds/Foot"
 
 func _ready() :
 	play("default")
 	current_state = PlayerState.CharacterState.Standing
 	lethal_sound = $"../Sounds/Lethal"
+	
+func _process(delta: float) -> void:
+	
+	if footstep_timer > footstep_interval && (current_state == PlayerState.CharacterState.Walking || current_state == PlayerState.CharacterState.Running) : 
+		var pitch = randf_range(0.85, 1.15)
+		foot.pitch_scale = pitch
+		foot.play()
+		footstep_timer = 0
+		
+	footstep_timer += 1
 
 func set_state(character_state) :
 	
@@ -25,8 +39,10 @@ func set_state(character_state) :
 	match character_state : 
 		PlayerState.CharacterState.Walking :
 			play("walk")
+
 		PlayerState.CharacterState.Running :
 			play("run")
+
 		PlayerState.CharacterState.Standing :
 			play("default")
 		PlayerState.CharacterState.LongJumpStarting : 
