@@ -27,11 +27,13 @@ func _process(delta: float) -> void:
 	footstep_timer += 1
 
 func set_state(character_state) :
-
+	
 	if locked : return
 
 	if character_state == current_state : 
 		return
+		
+	print(PlayerState.CharacterState.find_key(character_state))
 		
 	current_state = character_state
 		

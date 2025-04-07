@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 			#this function ensures that acceleration isn't too abbrupt
 			momentum += (direction/10) * ( abs(momentum)/momentum_damping + 0.1)
 			#character state stuff for animations
-			if momentum > 2 || momentum < -2 && is_on_floor():
+			if (momentum > 2 || momentum < -2) && is_on_floor():
 				animation_controller.set_state(PlayerState.CharacterState.Running)
 			elif is_on_floor() : 
 				animation_controller.set_state(PlayerState.CharacterState.Walking)
