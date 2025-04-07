@@ -25,6 +25,7 @@ var momentum = 0;
 @onready var ladder_spawn = $"LadderSpawn"
 @onready var mantle_location = $"MantleTeleportLocation"
 @onready var remote_transform_2d: RemoteTransform2D = $RemoteTransform2D
+@onready var spawn_point: Node2D = $SpawnPoint
 
 
 func _physics_process(delta: float) -> void:
@@ -90,6 +91,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("Ladder") : 
 		ladder_spawn.handle_ladder()
 		
+	if Input.is_action_just_released("Checkpoint") : 
+		spawn_point.move_spawn()
+		
 	if is_on_floor() :
 		state_container.last_grounded_location = tile_map.map_to_local(tile_map.local_to_map(position))
 
@@ -145,7 +149,7 @@ func detect_fall_damage() :
 		return
 		
 	
-	if velocity.y - previous_frame_falling_speed < -200 && previous_frame_falling_speed > 0 :
+	if velocity.y - previous_frame_falling_speed < -180 && previous_frame_falling_speed > 0 :
 		var damage : int = previous_frame_falling_speed / 200
 		
 		momentum = 0

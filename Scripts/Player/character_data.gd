@@ -11,7 +11,7 @@ var in_shelter : bool = false
 var rad_timer : int = 0
 var rad_threshold : int = 240
 
-var starting_pos : Vector2
+@onready var spawn_point: Node2D = $"../SpawnPoint"
 
 var on_ladder = false
 var climbed = false
@@ -36,13 +36,15 @@ func add_scrap(amount : int) :
 	number_scraps += amount
 	number_scraps = clamp(number_scraps, 0,3)	
 	update_bone_listeners()
-	
+
+func reset_scraps() :
+	number_scraps = 0
+	update_bone_listeners()
 	
 func _ready() :
 	bone_pile_scene = load("res://Scenes/skeleton.tscn")
 	current_health = max_health
 	number_scraps = default_scraps
-	starting_pos = get_parent().position
 	for listener in health_listeners :
 		listener.update_health(current_health)
 		
@@ -51,7 +53,7 @@ func _ready() :
 	
 func reset() :
 	
-	get_parent().position = starting_pos
+	get_parent().position = spawn_point.global_position
 	
 	var bone_instance = bone_pile_scene.instantiate()
 	add_child(bone_instance)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=4 uid="uid://bimxiu4qal2jp"]
+[gd_scene load_steps=109 format=4 uid="uid://bimxiu4qal2jp"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -30,7 +30,9 @@
 [ext_resource type="AudioStream" uid="uid://jm57542b4ja6" path="res://Sound/Player/LD57 Soft Landing.wav" id="22_ac2co"]
 [ext_resource type="AudioStream" uid="uid://b0235li1wx3we" path="res://Sound/Environment/LD57 Extreme wind.wav" id="22_oloc3"]
 [ext_resource type="AudioStream" uid="uid://cyce77y6122xv" path="res://Sound/Player/LD57 Foot step 1.wav" id="23_4lvmg"]
+[ext_resource type="Script" path="res://Scripts/Player/spawn_point.gd" id="24_g4o35"]
 [ext_resource type="AudioStream" uid="uid://dr61ifc047286" path="res://Sound/Player/LD57 Bones.wav" id="25_3kcyi"]
+[ext_resource type="Texture2D" uid="uid://cbuso3ejnlv4" path="res://Sprites/UI/Brittle_Heart.png" id="25_7cadf"]
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
 [ext_resource type="PackedScene" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 
@@ -780,10 +782,10 @@ radius = 10.0499
 radius = 5.09902
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opqj2"]
-size = Vector2(10, 59)
+size = Vector2(10, 71)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6xb"]
-size = Vector2(10, 59)
+size = Vector2(10, 71)
 
 [node name="Node2D" type="Node2D"]
 
@@ -918,15 +920,11 @@ collision_layer = 4
 
 [node name="LadderSprite" type="Sprite2D" parent="Player/LadderSpawn/Ladder"]
 z_index = -1
-position = Vector2(3.57628e-06, -24.5)
-texture = ExtResource("18_wccby")
-
-[node name="LadderSprite2" type="Sprite2D" parent="Player/LadderSpawn/Ladder"]
-z_index = -1
-position = Vector2(3.57628e-06, -24.5)
+position = Vector2(3.57628e-06, -30)
 texture = ExtResource("18_wccby")
 
 [node name="Area2D" type="Area2D" parent="Player/LadderSpawn/Ladder"]
+position = Vector2(0, -5.5)
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LadderSpawn/Ladder/Area2D"]
@@ -934,8 +932,17 @@ position = Vector2(0, -24.5)
 shape = SubResource("RectangleShape2D_opqj2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LadderSpawn/Ladder"]
-position = Vector2(0, -24.5)
+position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_rc6xb")
+
+[node name="SpawnPoint" type="Node2D" parent="Player"]
+script = ExtResource("24_g4o35")
+
+[node name="Ladder" type="Node2D" parent="Player/SpawnPoint"]
+
+[node name="spawn_sprite" type="Sprite2D" parent="Player/SpawnPoint/Ladder"]
+z_index = -1
+texture = ExtResource("25_7cadf")
 
 [node name="Sounds" type="Node" parent="Player"]
 
