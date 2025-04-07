@@ -33,17 +33,25 @@ func _ready() :
 	starting_pos = get_parent().position
 	for listener in health_listeners :
 		listener.update_health(current_health)
-		
-	await get_tree().create_timer(1).timeout
-		
 	
 func reset() :
 	get_parent().position = starting_pos
 	current_health = max_health
 	number_scraps = default_scraps
-	print("reset")
+	
+	for listener in health_listeners :
+		listener.update_health(current_health)
+	await get_tree().create_timer(1).timeout
+
+	grace_period = false
+	
 	
 func damage(dmg : int) :
+	if grace_period : 
+		for listener in health_listeners :
+			listener.update_health(current_health)
+		return
+	
 	print("damage")
 	current_health -= dmg
 	
