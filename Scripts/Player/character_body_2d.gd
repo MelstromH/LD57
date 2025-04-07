@@ -106,8 +106,8 @@ func handle_jump() :
 		momentum = momentum * 0.7
 		await animation_controller.wait_for_animation()
 		if is_on_floor() :
-			animation_controller.set_state(PlayerState.CharacterState.LongJumping)
-			#animation_controller.locked = true
+			animation_controller.set_state(PlayerState.CharacterState.LongJumpStarting)
+			#animation_controller.locked = trueaaaa
 			momentum = momentum * 1.7
 			velocity.y = actual_jump_velocity * 1.3
 
