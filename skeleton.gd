@@ -4,8 +4,14 @@ var player_state
 
 var previous_frame_falling_speed = 0
 
+@onready var area_2d: Area2D = $Area2D
+
 var crumble_timer = 0
 @export var crumble_threshold = 120
+
+func _ready() -> void:
+	await get_tree().create_timer(1).timeout
+	area_2d.monitoring = true
 	
 func _physics_process(delta: float) -> void:
 	

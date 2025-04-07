@@ -92,8 +92,7 @@ func _physics_process(delta: float) -> void:
 		state_container.last_grounded_location = tile_map.map_to_local(tile_map.local_to_map(position))
 
 func handle_jump() :
-	
-	
+
 	if can_mantle : 
 		momentum = 0
 		animation_controller.set_state(PlayerState.CharacterState.Mantling)
@@ -103,18 +102,22 @@ func handle_jump() :
 		
 	if  abs(momentum) >= (momentum_max * 0.7) && !can_mantle : 
 		animation_controller.set_state(PlayerState.CharacterState.LongJumpStarting)
-		momentum = momentum * 0.7
+		var stored_momentum = momentum
+		momentum = 0.5 * momentum
 		await animation_controller.wait_for_animation()
-		if is_on_floor() :
-			animation_controller.set_state(PlayerState.CharacterState.LongJumpStarting)
-			#animation_controller.locked = trueaaaa
-			momentum = momentum * 1.7
-			velocity.y = actual_jump_velocity * 1.3
+		animation_controller.set_state(PlayerState.CharacterState.LongJumpStarting)
+		#animation_controller.locked = trueaaaa
+		momentum = stored_momentum * 1.7
+		velocity.y = actual_jump_velocity * 1.3
+			
 
 	elif !can_mantle :
+		var stored_momentum = momentum
+		momentum = 0
 		animation_controller.set_state(PlayerState.CharacterState.Hopping)
 		await animation_controller.wait_for_animation()
-		if is_on_floor() && velocity != null && actual_jump_velocity:
+		if velocity != null && actual_jump_velocity:
+			momentum = stored_momentum
 			velocity.y = actual_jump_velocity * 1.
 		
 	
