@@ -5,7 +5,7 @@ const LD_57 = preload("res://Sound/Music/LD57.wav")
 const LD_57_SOUNDSCAPE = preload("res://Sound/Music/LD57 soundscape.wav")
 
 var current_track
-var tracks = [LD_57_CAVE_AMBIENCE, LD_57, LD_57_SOUNDSCAPE]
+var tracks = [LD_57_CAVE_AMBIENCE, LD_57, LD_57_SOUNDSCAPE, LD_57]
 
 @export var fade_to := 0
 @export var fade_speed := 0.1
