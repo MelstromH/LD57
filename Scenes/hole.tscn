@@ -863,10 +863,6 @@ script = SubResource("GDScript_bm4uw")
 position = Vector2(7, -8)
 shape = SubResource("CircleShape2D_qbcij")
 
-[node name="StateContainer" type="Node2D" parent="Player"]
-unique_name_in_owner = true
-script = ExtResource("4_054vt")
-
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 z_index = -1
 remote_path = NodePath("../../Camera2D")
