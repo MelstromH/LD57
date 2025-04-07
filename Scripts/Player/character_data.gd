@@ -4,6 +4,7 @@ extends Node2D
 var current_health
 
 var health_listeners : Array[Node]
+var bone_listeners : Array[Node]
 
 var in_wind : bool = false
 var in_shelter : bool = false
@@ -28,9 +29,13 @@ var grace_period = false
 func subscribe_health(listener: Node) :
 	health_listeners.append(listener)
 
-func add_scrap() :
-	if number_scraps < scrap_ladder_threshold :
-		number_scraps += 1
+func subscribe_bones(listener: Node) :
+	bone_listeners.append(listener)
+
+func add_scrap(amount : int) :
+	number_scraps += amount
+	number_scraps = clamp(number_scraps, 0,3)	
+	update_bone_listeners()
 	
 	
 func _ready() :
@@ -40,6 +45,9 @@ func _ready() :
 	starting_pos = get_parent().position
 	for listener in health_listeners :
 		listener.update_health(current_health)
+		
+	for listener in bone_listeners :
+		listener.update_bones(number_scraps)
 	
 func reset() :
 	
@@ -58,6 +66,8 @@ func reset() :
 	for listener in health_listeners :
 		listener.update_health(current_health)
 	await get_tree().create_timer(1).timeout
+	
+	update_bone_listeners()
 
 	grace_period = false
 	
@@ -82,6 +92,9 @@ func _process(delta: float) -> void:
 	
 	handle_radiation()
 	
+func update_bone_listeners() :
+	for listener in bone_listeners :
+		listener.update_bones(number_scraps)
 	
 func handle_radiation() :
 	if in_wind && not in_shelter :

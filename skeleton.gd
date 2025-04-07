@@ -9,6 +9,8 @@ var previous_frame_falling_speed = 0
 var crumble_timer = 0
 @export var crumble_threshold = 120
 
+@export var scrap_granted = 1
+
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	area_2d.monitoring = true
@@ -35,6 +37,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player" :
 		if not player_state :
 			player_state = body.get_node("StateContainer")
-		player_state.add_scrap()
+		player_state.add_scrap(scrap_granted)
 		print("scrap added " + str(player_state.number_scraps))
 		die()

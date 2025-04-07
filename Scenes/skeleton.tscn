@@ -12,6 +12,7 @@ size = Vector2(20, 7.5)
 [node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_wvi2i")
+scrap_granted = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_rvjsr")

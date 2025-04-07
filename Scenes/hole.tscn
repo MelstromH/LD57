@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://bimxiu4qal2jp"]
+[gd_scene load_steps=107 format=4 uid="uid://bimxiu4qal2jp"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://nh4ey2muxt0w" path="res://Sprites/icon.svg" id="2_ej8y6"]
 [ext_resource type="Script" path="res://Scripts/Player/character_body_2d.gd" id="2_h45im"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="2_p0klu"]
+[ext_resource type="Script" path="res://Scripts/UI/bone_container.gd" id="3_82hoc"]
 [ext_resource type="Script" path="res://Scripts/Player/character_data.gd" id="4_054vt"]
 [ext_resource type="Texture2D" uid="uid://b5kg5tkbnlic5" path="res://Sprites/UI/Full_Heart.png" id="4_bpgvt"]
+[ext_resource type="Texture2D" uid="uid://cubs5yksan2mg" path="res://Sprites/UI/bones.png" id="5_kgqmb"]
 [ext_resource type="PackedScene" uid="uid://dr4l0atc0ddwp" path="res://wind_particle.tscn" id="5_xlf4n"]
 [ext_resource type="Texture2D" uid="uid://5px6c1llsvl7" path="res://Sprites/Lizard/32_BH_Walk_Strip_10.png" id="6_jrby7"]
 [ext_resource type="Texture2D" uid="uid://b5lt4j24d0xlh" path="res://Sprites/Lizard/32_BH_Run_Strip_8.png" id="6_su8xx"]
@@ -30,7 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://cyce77y6122xv" path="res://Sound/Player/LD57 Foot step 1.wav" id="23_4lvmg"]
 [ext_resource type="AudioStream" uid="uid://dr61ifc047286" path="res://Sound/Player/LD57 Bones.wav" id="25_3kcyi"]
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
-[ext_resource type="PackedScene" uid="uid://bfld41ywj425" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
+[ext_resource type="PackedScene" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvucq"]
 texture = ExtResource("1_0hvgt")
@@ -822,19 +824,19 @@ texture = ExtResource("4_bpgvt")
 
 [node name="Bones" type="Node2D" parent="Camera2D"]
 position = Vector2(133.845, -64)
-script = ExtResource("2_p0klu")
+script = ExtResource("3_82hoc")
 
 [node name="Bone1" type="Sprite2D" parent="Camera2D/Bones"]
 position = Vector2(-25.92, -0.919998)
-texture = ExtResource("4_bpgvt")
+texture = ExtResource("5_kgqmb")
 
 [node name="Bone2" type="Sprite2D" parent="Camera2D/Bones"]
 position = Vector2(-12.92, -0.919998)
-texture = ExtResource("4_bpgvt")
+texture = ExtResource("5_kgqmb")
 
 [node name="Bone3" type="Sprite2D" parent="Camera2D/Bones"]
 position = Vector2(0.160004, -0.839996)
-texture = ExtResource("4_bpgvt")
+texture = ExtResource("5_kgqmb")
 
 [node name="wind" type="Node2D" parent="Camera2D"]
 visible = false
