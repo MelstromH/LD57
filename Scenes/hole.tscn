@@ -29,7 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://cyce77y6122xv" path="res://Sound/Player/LD57 Foot step 1.wav" id="23_4lvmg"]
 [ext_resource type="AudioStream" uid="uid://dr61ifc047286" path="res://Sound/Player/LD57 Bones.wav" id="25_3kcyi"]
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
-[ext_resource type="PackedScene" uid="uid://bfld41ywj425" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
+[ext_resource type="PackedScene" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvucq"]
 texture = ExtResource("1_0hvgt")

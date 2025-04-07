@@ -33,6 +33,8 @@ func die() :
 
 func _on_area_2d_body_entered(body: Node2D) -> void: 
 	if body.name == "Player" :
+		if not player_state :
+			player_state = body.get_node("StateContainer")
 		player_state.add_scrap()
 		print("scrap added " + str(player_state.number_scraps))
 		die()
