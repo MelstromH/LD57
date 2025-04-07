@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-var current_state : PlayerState.CharacterState
+var current_state : PlayerState.CharacterState = PlayerState.CharacterState.Standing
 
 var locked = false
 var lethal_sound : AudioStreamPlayer
@@ -13,7 +13,8 @@ var footstep_timer = 0
 @onready var foot: AudioStreamPlayer = $"../Sounds/Foot"
 
 func _ready() :
-	set_state(PlayerState.CharacterState.Standing)
+	play("default")
+	current_state = PlayerState.CharacterState.Standing
 	lethal_sound = $"../Sounds/Lethal"
 	
 func _process(delta: float) -> void:
@@ -28,10 +29,8 @@ func _process(delta: float) -> void:
 
 func set_state(character_state) :
 	
-	
-	
 	if locked : return
-	print(PlayerState.CharacterState.find_key(character_state))
+	
 	if character_state == current_state : 
 		return
 		

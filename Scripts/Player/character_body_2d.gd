@@ -51,15 +51,15 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis("Left", "Right")
 
-	if direction && !animation_controller.locked:
+	if direction && !animation_controller.locked :
 		#make sure character isn't going too fast
 		if direction * momentum >= 0 :
 			#this function ensures that acceleration isn't too abbrupt
 			momentum += (direction/10) * ( abs(momentum)/momentum_damping + 0.1)
 			#character state stuff for animations
-			if momentum > 2 || momentum < -2 && is_on_floor():
+			if momentum > 2 || momentum < -2 :
 				animation_controller.set_state(PlayerState.CharacterState.Running)
-			elif is_on_floor() : 
+			else : 
 				animation_controller.set_state(PlayerState.CharacterState.Walking)
 				
 		else :
@@ -103,7 +103,7 @@ func handle_jump() :
 		await animation_controller.wait_for_animation()
 		if is_on_floor() :
 			animation_controller.set_state(PlayerState.CharacterState.LongJumping)
-			#animation_controller.locked = true
+			animation_controller.locked = true
 			momentum = momentum * 1.7
 			velocity.y = actual_jump_velocity * 1.3
 

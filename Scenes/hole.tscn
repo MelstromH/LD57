@@ -762,7 +762,7 @@ func _process(delta: float) -> void:
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbcij"]
-radius = 10.0499
+radius = 7.07107
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbwcd"]
 radius = 5.09902
@@ -833,11 +833,6 @@ momentum_decay = 0.25
 momentum_damping = 2.5
 tile_map = NodePath("../TileMapLayer")
 
-[node name="StateContainer" type="Node2D" parent="Player"]
-unique_name_in_owner = true
-script = ExtResource("4_054vt")
-max_health = 2
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 2.25)
 shape = SubResource("RectangleShape2D_cwvnk")
@@ -860,8 +855,13 @@ texture = ExtResource("2_ej8y6")
 script = SubResource("GDScript_bm4uw")
 
 [node name="MantleDetectorShape" type="CollisionShape2D" parent="Player/MantleDetector"]
-position = Vector2(7, -8)
+position = Vector2(7, -12)
 shape = SubResource("CircleShape2D_qbcij")
+
+[node name="StateContainer" type="Node2D" parent="Player"]
+unique_name_in_owner = true
+script = ExtResource("4_054vt")
+max_health = 2
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 z_index = -1
