@@ -11,8 +11,12 @@ var rad_timer : int = 0
 var rad_threshold : int = 240
 
 var on_ladder = false
+var climbed = false
 
 var gravity_multiplier = 1
+
+var number_scraps = 0
+@export var scrap_ladder_threshold = 3
 	
 func subscribe_health(listener: Node) :
 	health_listeners.append(listener)

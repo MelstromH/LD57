@@ -24,15 +24,11 @@ func _process(delta: float) -> void:
 			var new_pos = Vector2i(width * 0.25, middle_index.y)
 			player.position = Vector2i(map_to_local(new_pos).x, player.position.y)
 			
-			
-		
 		if middle_index.x < width * 0.25 - 1 :
 			print(middle_index.x)
 			var new_pos = Vector2i(width * 0.75, middle_index.y)
 			player.position = Vector2i(map_to_local(new_pos).x, player.position.y)
 
-		
-	
 	else : 
 		if timer >= update_interval :
 			timer = 0

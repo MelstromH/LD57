@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d214j3nd33vok"
-path="res://.godot/imported/LD57 Radiation Detection.wav-5981882acf89d3fe2fbd63e220644cf7.sample"
+path="res://.godot/imported/LD57 Radiation Detection.wav-86dcf924c5f1ef11773c9d545aa50fa5.sample"
 
 [deps]
 
-source_file="res://LD57 Radiation Detection.wav"
-dest_files=["res://.godot/imported/LD57 Radiation Detection.wav-5981882acf89d3fe2fbd63e220644cf7.sample"]
+source_file="res://Sound/Environment/LD57 Radiation Detection.wav"
+dest_files=["res://.godot/imported/LD57 Radiation Detection.wav-86dcf924c5f1ef11773c9d545aa50fa5.sample"]
 
 [params]
 
