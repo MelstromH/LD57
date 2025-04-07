@@ -24,6 +24,8 @@ var momentum = 0;
 @onready var state_container = $StateContainer
 @onready var ladder_spawn = $"LadderSpawn"
 @onready var mantle_location = $"MantleTeleportLocation"
+@onready var remote_transform_2d: RemoteTransform2D = $RemoteTransform2D
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -96,7 +98,18 @@ func handle_jump() :
 	if can_mantle : 
 		momentum = 0
 		animation_controller.set_state(PlayerState.CharacterState.Mantling)
+		
+		#camera control
+		var camera_start = remote_transform_2d.global_position
+		remote_transform_2d.top_level = true
+		remote_transform_2d.position = camera_start
+		
+		#move player
 		position = mantle_location.global_position
+		
+		remote_transform_2d.gradually_move_to_player(self)
+		
+		
 	else : 
 		actual_jump_velocity = BASE_JUMP_VELOCITY	
 		
@@ -132,8 +145,8 @@ func detect_fall_damage() :
 		return
 		
 	
-	if velocity.y - previous_frame_falling_speed < -150 && previous_frame_falling_speed > 0 :
-		var damage : int = previous_frame_falling_speed / 150
+	if velocity.y - previous_frame_falling_speed < -200 && previous_frame_falling_speed > 0 :
+		var damage : int = previous_frame_falling_speed / 200
 		
 		momentum = 0
 		
