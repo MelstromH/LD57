@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://bimxiu4qal2jp"]
+[gd_scene load_steps=118 format=4 uid="uid://bimxiu4qal2jp"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -32,7 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://cyce77y6122xv" path="res://Sound/Player/LD57 Foot step 1.wav" id="23_4lvmg"]
 [ext_resource type="Script" path="res://Scripts/Player/spawn_point.gd" id="24_g4o35"]
 [ext_resource type="AudioStream" uid="uid://dr61ifc047286" path="res://Sound/Player/LD57 Bones.wav" id="25_3kcyi"]
-[ext_resource type="Texture2D" uid="uid://cbuso3ejnlv4" path="res://Sprites/UI/Brittle_Heart.png" id="25_7cadf"]
+[ext_resource type="Texture2D" uid="uid://mi83x2k2yjra" path="res://Sprites/EnvironmentObjects/16x32_spawn_point_8.png" id="25_yhpti"]
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
 [ext_resource type="PackedScene" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 
@@ -787,6 +787,70 @@ size = Vector2(10, 71)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6xb"]
 size = Vector2(10, 71)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxlh8"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(0, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a5n2"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(16, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gvvk"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(32, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u060e"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(48, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_368if"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(64, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la331"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(80, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x7k8"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(96, 0, 16, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbt83"]
+atlas = ExtResource("25_yhpti")
+region = Rect2(112, 0, 16, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2dou"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxlh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gvvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u060e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_368if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la331")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x7k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbt83")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("player")]
@@ -940,9 +1004,11 @@ script = ExtResource("24_g4o35")
 
 [node name="Ladder" type="Node2D" parent="Player/SpawnPoint"]
 
-[node name="spawn_sprite" type="Sprite2D" parent="Player/SpawnPoint/Ladder"]
+[node name="spawn_sprite" type="AnimatedSprite2D" parent="Player/SpawnPoint/Ladder"]
 z_index = -1
-texture = ExtResource("25_7cadf")
+sprite_frames = SubResource("SpriteFrames_f2dou")
+autoplay = "default"
+frame_progress = 0.961107
 
 [node name="Sounds" type="Node" parent="Player"]
 
