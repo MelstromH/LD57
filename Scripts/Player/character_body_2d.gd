@@ -124,6 +124,10 @@ func set_direction_facing(direction_input: int) :
 		direction_facing = direction_input
 		
 func detect_fall_damage() :
+	if animation_controller.current_state == PlayerState.CharacterState.Mantling:
+		previous_frame_falling_speed = 0
+		return
+		
 	
 	if velocity.y - previous_frame_falling_speed < -150 && previous_frame_falling_speed > 0 :
 		var damage : int = previous_frame_falling_speed / 150
