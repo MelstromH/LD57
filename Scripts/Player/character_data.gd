@@ -20,14 +20,21 @@ var gravity_multiplier = 1
 var default_scraps = 0
 var number_scraps = 0
 @export var scrap_ladder_threshold = 3
+var last_grounded_location : Vector2
+var bone_pile_scene : PackedScene
 
 var grace_period = false
 	
 func subscribe_health(listener: Node) :
 	health_listeners.append(listener)
 
-func _ready() :
+func add_scrap() :
+	if number_scraps < scrap_ladder_threshold :
+		number_scraps += 1
 	
+	
+func _ready() :
+	bone_pile_scene = load("res://Scenes/skeleton.tscn")
 	current_health = max_health
 	number_scraps = default_scraps
 	starting_pos = get_parent().position
@@ -35,6 +42,12 @@ func _ready() :
 		listener.update_health(current_health)
 	
 func reset() :
+	var bone_instance = bone_pile_scene.instantiate()
+	add_child(bone_instance)
+	bone_instance.player_state = self
+	bone_instance.position = last_grounded_location
+	bone_instance.top_level = true
+	
 	get_parent().position = starting_pos
 	current_health = max_health
 	number_scraps = default_scraps

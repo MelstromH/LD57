@@ -50,7 +50,8 @@ func handle_ladder() :
 	
 	print("ray collided with: " + str(result))
 	
-	if !result :
+	if !result && player_state.number_scraps > player_state.scrap_ladder_threshold:
+		player_state.number_scraps = 0
 		show_ladder()
 		
 		

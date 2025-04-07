@@ -87,6 +87,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_released("Ladder") : 
 		ladder_spawn.handle_ladder()
+		
+	if is_on_floor() :
+		state_container.last_grounded_location = tile_map.map_to_local(tile_map.local_to_map(position))
 
 func handle_jump() :
 	
