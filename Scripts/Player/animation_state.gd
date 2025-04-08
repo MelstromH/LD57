@@ -33,7 +33,7 @@ func set_state(character_state) :
 	if character_state == current_state : 
 		return
 		
-	#print(PlayerState.CharacterState.find_key(character_state))
+	print(PlayerState.CharacterState.find_key(character_state))
 		
 	current_state = character_state
 		
@@ -46,6 +46,7 @@ func set_state(character_state) :
 
 		PlayerState.CharacterState.Standing :
 			play("default")
+			
 		PlayerState.CharacterState.LongJumpStarting : 
 			play("longjumpstart")
 			locked = true
@@ -65,6 +66,10 @@ func set_state(character_state) :
 			locked = true
 		PlayerState.CharacterState.LongJumping : 
 			play("jumploop")
+		PlayerState.CharacterState.ClimbingUp : 
+			play("ladder")
+		PlayerState.CharacterState.ClimbingDown : 
+			play_backwards("ladder")
 		
 func wait_for_animation() :
 	

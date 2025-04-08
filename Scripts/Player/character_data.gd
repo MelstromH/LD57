@@ -18,7 +18,7 @@ var climbed = false
 
 var gravity_multiplier = 1
 
-@export var default_scraps = 3
+@export var default_scraps = 0
 var number_scraps = 0
 @export var scrap_ladder_threshold = 3
 var last_grounded_location : Vector2

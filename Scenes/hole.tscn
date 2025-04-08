@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://bw26kubkcvn57"]
+[gd_scene load_steps=126 format=4 uid="uid://bw26kubkcvn57"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/Level/wind.gd" id="11_f62tx"]
 [ext_resource type="AudioStream" uid="uid://d214j3nd33vok" path="res://Sound/Environment/LD57 Radiation Detection.wav" id="11_p23if"]
 [ext_resource type="Script" path="res://Scripts/Player/ladder_spawn.gd" id="12_mafti"]
+[ext_resource type="Texture2D" uid="uid://ciwhx8aot1p6k" path="res://Sprites/Lizard/34_LadderClimb_6.png" id="15_k725j"]
 [ext_resource type="Texture2D" uid="uid://bwwsg320eptb2" path="res://Sprites/Ladder/BoneLadder.png" id="18_wccby"]
 [ext_resource type="Script" path="res://Scenes/camera_controller.gd" id="19_3k2wk"]
 [ext_resource type="AudioStream" uid="uid://c77h21nuhka5d" path="res://Sound/Player/LD57 Lethal Landing.wav" id="20_aqfby"]
@@ -419,6 +420,30 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("8_ywj52")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk4oc"]
+atlas = ExtResource("15_k725j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddlkb"]
+atlas = ExtResource("15_k725j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nk032"]
+atlas = ExtResource("15_k725j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evqcy"]
+atlas = ExtResource("15_k725j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5sej"]
+atlas = ExtResource("15_k725j")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8mnq"]
+atlas = ExtResource("15_k725j")
+region = Rect2(160, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_317yg"]
 atlas = ExtResource("9_0nxea")
 region = Rect2(0, 0, 32, 32)
@@ -670,6 +695,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"jumploop",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk4oc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddlkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nk032")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evqcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5sej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8mnq")
+}],
+"loop": true,
+"name": &"ladder",
 "speed": 10.0
 }, {
 "frames": [{
@@ -967,7 +1015,8 @@ shape = SubResource("RectangleShape2D_cwvnk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_yb2ig")
-animation = &"jumploop"
+animation = &"ladder"
+frame_progress = 0.71668
 script = ExtResource("8_md2yt")
 
 [node name="MantleTeleportLocation" type="Node2D" parent="Player"]

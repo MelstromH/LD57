@@ -35,19 +35,19 @@ func _physics_process(delta: float) -> void:
 		
 		animation_controller.set_state(PlayerState.CharacterState.LongJumping)
 			
-	elif not is_on_floor() : 
+	elif not is_on_floor() && not Input.is_action_pressed("Climb"): 
 		velocity.y = 50
 		state_container.climbed = true
-		animation_controller.set_state(PlayerState.CharacterState.Walking)
+		animation_controller.set_state(PlayerState.CharacterState.ClimbingDown)
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and ( is_on_floor() || can_mantle) && !animation_controller.locked:
 		handle_jump()
 	
-			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if state_container.on_ladder && Input.is_action_pressed("Climb") :
+		animation_controller.set_state(PlayerState.CharacterState.ClimbingUp)
 		velocity.y = -50
 		state_container.climbed = true
 
@@ -67,7 +67,9 @@ func _physics_process(delta: float) -> void:
 				
 		else :
 			momentum = move_toward(momentum, 0, friction)
-			animation_controller.set_state(PlayerState.CharacterState.Walking)
+			
+			if is_on_floor() :
+				animation_controller.set_state(PlayerState.CharacterState.Walking)
 		
 		momentum = clamp(momentum, -2.5, 2.5)
 		
@@ -170,10 +172,9 @@ func detect_fall_damage() :
 		momentum = 0
 		velocity.y = 0
 		previous_frame_falling_speed = 0
+		state_container.last_grounded_location = Vector2(1000, 1000)
 		state_container.damage(5)
-		state_container.last_grounded_location = null
-
-	
+			
 func _on_mantle_detector_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	var coords = tile_map.get_coords_for_body_rid(body_rid)
 	var tile = tile_map.get_cell_tile_data(coords)
