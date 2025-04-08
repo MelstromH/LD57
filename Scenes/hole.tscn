@@ -1016,7 +1016,7 @@ shape = SubResource("RectangleShape2D_cwvnk")
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_yb2ig")
 animation = &"ladder"
-frame_progress = 0.71668
+frame_progress = 0.341377
 script = ExtResource("8_md2yt")
 
 [node name="MantleTeleportLocation" type="Node2D" parent="Player"]

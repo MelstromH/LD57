@@ -12,6 +12,7 @@ var footstep_timer = 0
 @onready var soft: AudioStreamPlayer = $"../Sounds/Soft"
 @onready var foot: AudioStreamPlayer = $"../Sounds/Foot"
 
+
 func _ready() :
 	set_state(PlayerState.CharacterState.Standing)
 	lethal_sound = $"../Sounds/Lethal"

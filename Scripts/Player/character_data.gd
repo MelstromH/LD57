@@ -24,6 +24,8 @@ var number_scraps = 0
 var last_grounded_location : Vector2
 var bone_pile_scene : PackedScene
 
+@onready var get_bone: AudioStreamPlayer = $"../Sounds/GetBone"
+
 var grace_period = false
 	
 func subscribe_health(listener: Node) :
@@ -96,6 +98,8 @@ func _process(delta: float) -> void:
 	handle_radiation()
 	
 func update_bone_listeners() :
+	get_bone.play()
+	
 	for listener in bone_listeners :
 		listener.update_bones(number_scraps)
 	
