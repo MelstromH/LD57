@@ -168,7 +168,7 @@ func detect_fall_damage() :
 	
 	previous_frame_falling_speed = velocity.y
 	
-	if velocity.y > 500 : 
+	if velocity.y > 800 : 
 		momentum = 0
 		velocity.y = 0
 		previous_frame_falling_speed = 0
