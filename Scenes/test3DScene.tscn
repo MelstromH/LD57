@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://b7h68evby3me3"]
 
 [ext_resource type="Material" uid="uid://cvq60epa5x6s8" path="res://Models/projection_mat.tres" id="1_ig11b"]
-[ext_resource type="PackedScene" uid="uid://bimxiu4qal2jp" path="res://Scenes/hole.tscn" id="1_o0dg6"]
+[ext_resource type="PackedScene" uid="uid://bw26kubkcvn57" path="res://Scenes/hole.tscn" id="1_o0dg6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_veho2"]
 
@@ -59,6 +59,9 @@ fov = 34.9
 environment = SubResource("Environment_4wfsy")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(360, 240)
+canvas_item_default_texture_filter = 0
+size = Vector2i(1440, 960)
+size_2d_override = Vector2i(360, 240)
+size_2d_override_stretch = true
 
 [node name="Hole" parent="SubViewport" instance=ExtResource("1_o0dg6")]
