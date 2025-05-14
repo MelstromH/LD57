@@ -34,7 +34,7 @@ func set_state(character_state) :
 	if character_state == current_state : 
 		return
 		
-	print(PlayerState.CharacterState.find_key(character_state))
+	#print(PlayerState.CharacterState.find_key(character_state))
 		
 	current_state = character_state
 		
@@ -68,15 +68,14 @@ func set_state(character_state) :
 		PlayerState.CharacterState.LongJumping : 
 			play("jumploop")
 		PlayerState.CharacterState.ClimbingUp : 
-			play("ladder")
+			play("walk")
 		PlayerState.CharacterState.ClimbingDown : 
-			play_backwards("ladder")
+			play_backwards("walk")
 		
 func wait_for_animation() :
 	
 	while locked == true :
 		await get_tree().create_timer(0.05).timeout
-		
 	
 	return
 

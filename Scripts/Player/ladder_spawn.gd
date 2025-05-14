@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if not ladder.is_on_floor():
 		ladder.velocity += ladder.get_gravity() * delta
 		
-	if ladder.velocity.y - previous_frame_falling_speed < -200  :
+	if ladder.velocity.y - previous_frame_falling_speed < -400  :
 		die()
 		
 	previous_frame_falling_speed = ladder.velocity.y
