@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://bw26kubkcvn57"]
+[gd_scene load_steps=120 format=4 uid="uid://bw26kubkcvn57"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/spawn_point.gd" id="24_g4o35"]
 [ext_resource type="AudioStream" uid="uid://dr61ifc047286" path="res://Sound/Player/LD57 Bones.wav" id="25_3kcyi"]
 [ext_resource type="Texture2D" uid="uid://mi83x2k2yjra" path="res://Sprites/EnvironmentObjects/16x32_spawn_point_8.png" id="25_yhpti"]
+[ext_resource type="Script" path="res://Scenes/PlayerSounds.gd" id="26_hi1hk"]
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
 [ext_resource type="PackedScene" uid="uid://bfld41ywj425" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 [ext_resource type="PackedScene" uid="uid://b25p4y80d8n8x" path="res://Scenes/skeleton.tscn" id="34_lw7gy"]
@@ -1038,6 +1039,7 @@ autoplay = "default"
 frame_progress = 0.961107
 
 [node name="Sounds" type="Node" parent="Player"]
+script = ExtResource("26_hi1hk")
 
 [node name="Lethal" type="AudioStreamPlayer" parent="Player/Sounds"]
 stream = ExtResource("20_aqfby")

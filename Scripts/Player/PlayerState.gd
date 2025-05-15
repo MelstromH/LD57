@@ -46,7 +46,6 @@ class Standing extends PlayerState :
 			switch_state(player, PlayerState.climbing_up_state) 
 			return false;
 		else :
-			player.animation_controller.soft.play()
 			
 			if player.velocity.x != 0:
 				if abs(player.momentum) < (player.momentum_max * player.run_threshold) : 
@@ -65,6 +64,8 @@ class Standing extends PlayerState :
 			player.momentum = move_toward(player.momentum, 0, player.friction * abs(player.momentum/player.momentum_max) + player.friction)
 				
 			player.set_direction_facing(player.velocity.x)
+			
+			player.state_container.last_grounded_location = player.tile_map.map_to_local(player.tile_map.local_to_map(player.position))
 		
 		return true;
 		#print("velocity: " + str(player.velocity.x))
@@ -82,10 +83,11 @@ class Walking extends Standing :
 			switch_state(player, PlayerState.running_state)
 		else :
 			player.animation_controller.set_state(PlayerState.CharacterState.Walking)
+			player.sounds.process_footsteps(2)
 			
 		return true
 		
-class Running extends Walking :
+class Running extends Standing :
 		
 	func get_name() -> String : return "Running"
 	
@@ -97,7 +99,7 @@ class Running extends Walking :
 			switch_state(player, PlayerState.standing_state)
 		else :
 			player.animation_controller.set_state(PlayerState.CharacterState.Running)
-			
+			player.sounds.process_footsteps(4)
 		return true
 		
 class LongJumping extends PlayerState :

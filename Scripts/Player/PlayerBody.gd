@@ -29,13 +29,13 @@ var momentum = 0;
 @onready var mantle_location = $"MantleTeleportLocation"
 @onready var remote_transform_2d: RemoteTransform2D = $RemoteTransform2D
 @onready var spawn_point: Node2D = $SpawnPoint
+@onready var sounds: Node = $Sounds
 
 
 func _physics_process(delta: float) -> void:
 	state.update(self, delta)
 	
 	detect_fall_damage()
-	
 	velocity.x = (SPEED * momentum) 
 	move_and_slide()
 	
@@ -45,8 +45,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("Checkpoint") : 
 		spawn_point.move_spawn()
 		
-	if is_on_floor() :
-		state_container.last_grounded_location = tile_map.map_to_local(tile_map.local_to_map(position))
 
 func handle_jump() :
 
@@ -77,13 +75,15 @@ func detect_fall_damage() :
 		
 		if  damage >= state_container.current_health : 
 			animation_controller.set_state(PlayerState.CharacterState.LethalLanding)
+			sounds.lethal_sound.play()
 			await animation_controller.wait_for_animation()
 			state_container.damage(damage)
 		else : 
 			state_container.damage(damage)
+			sounds.hard.play()
 			animation_controller.set_state(PlayerState.CharacterState.HardLanding)
-	elif velocity.y - previous_frame_falling_speed < -50 && previous_frame_falling_speed > 0 : 
-		#animation_controller.soft.play()
+	elif velocity.y - previous_frame_falling_speed < -70 && previous_frame_falling_speed > 0 : 
+		sounds.soft.play()
 		pass
 	
 	previous_frame_falling_speed = velocity.y

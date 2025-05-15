@@ -3,29 +3,9 @@ extends AnimatedSprite2D
 var current_state : PlayerState.CharacterState
 
 var locked = false
-var lethal_sound : AudioStreamPlayer
-
-var footstep_interval = 100
-var footstep_timer = 0
-
-@onready var hard: AudioStreamPlayer = $"../Sounds/Hard"
-@onready var soft: AudioStreamPlayer = $"../Sounds/Soft"
-@onready var foot: AudioStreamPlayer = $"../Sounds/Foot"
-
 
 func _ready() :
 	set_state(PlayerState.CharacterState.Standing)
-	lethal_sound = $"../Sounds/Lethal"
-	
-func _process(delta: float) -> void:
-	
-	if footstep_timer > footstep_interval && (current_state == PlayerState.CharacterState.Walking || current_state == PlayerState.CharacterState.Running) : 
-		var pitch = randf_range(0.85, 1.15)
-		foot.pitch_scale = pitch
-		foot.play()
-		footstep_timer = 0
-		
-	footstep_timer += 1
 
 func set_state(character_state) :
 	
@@ -53,11 +33,9 @@ func set_state(character_state) :
 			locked = true
 		PlayerState.CharacterState.HardLanding : 
 			play("hardfall")
-			hard.play()
 			locked = true
 		PlayerState.CharacterState.LethalLanding : 
 			play("deadlyfall")
-			lethal_sound.play()
 			locked = true
 		PlayerState.CharacterState.Hopping : 
 			play("hop")
