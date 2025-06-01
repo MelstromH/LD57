@@ -62,8 +62,10 @@ Checkpoint={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.101961, 0.00392157, 0.121569, 1)
 anti_aliasing/quality/screen_space_aa=1
+2d/snap/snap_2d_transforms_to_pixel=true
 textures/stretch/mode="viewport"

@@ -38,6 +38,12 @@ class Standing extends PlayerState :
 			else :
 				switch_state(player, PlayerState.longjumpstart_state)
 				return false;
+				
+		if Input.is_action_just_pressed("Ladder") :
+			player.ropes.add_rope_segment()
+			player.ropes.add_rope_segment()
+			player.ropes.add_rope_segment()
+			player.ropes.add_rope_segment()
 			
 		if not player.is_on_floor() :
 			switch_state(player, PlayerState.longjumping_state)

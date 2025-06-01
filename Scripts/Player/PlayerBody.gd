@@ -30,6 +30,7 @@ var momentum = 0;
 @onready var remote_transform_2d: RemoteTransform2D = $RemoteTransform2D
 @onready var spawn_point: Node2D = $SpawnPoint
 @onready var sounds: Node = $Sounds
+@onready var ropes: Node = $Ropes
 
 
 func _physics_process(delta: float) -> void:
@@ -39,8 +40,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = (SPEED * momentum) 
 	move_and_slide()
 	
-	if Input.is_action_just_released("Ladder") : 
-		ladder_spawn.handle_ladder()
+	#if Input.is_action_just_released("Ladder") : 
+		#ladder_spawn.handle_ladder()
 		
 	if Input.is_action_just_released("Checkpoint") : 
 		spawn_point.move_spawn()
