@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwbdo3o6ytpff"]
 
-[ext_resource type="Script" path="res://Scripts/rope_segment.gd" id="1_e2jot"]
+[ext_resource type="Script" path="res://Scripts/physics/rope_segment.gd" id="1_e2jot"]
 [ext_resource type="Texture2D" uid="uid://jh0undmmv6np" path="res://Sprites/rope_test.png" id="1_qhn4h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tx6kb"]
@@ -9,7 +9,7 @@ height = 57.1429
 
 [node name="RopeSeg" type="RigidBody2D"]
 collision_layer = 4
-linear_damp = 4.0
+mass = 0.1
 script = ExtResource("1_e2jot")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,6 +27,7 @@ texture = ExtResource("1_qhn4h")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 node_b = NodePath("..")
+bias = 0.3
 softness = 0.1
 
 [node name="PinHole" type="Node2D" parent="."]

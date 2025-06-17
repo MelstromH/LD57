@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b25p4y80d8n8x"]
 
-[ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_wvi2i"]
+[ext_resource type="Script" path="res://Scripts/Level/skeleton.gd" id="1_wvi2i"]
 [ext_resource type="Texture2D" uid="uid://c6a1bqnr3275q" path="res://Sprites/EnvironmentObjects/BoneLizard.png" id="2_rvjsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45crf"]

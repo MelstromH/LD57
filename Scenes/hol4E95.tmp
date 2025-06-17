@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=4 uid="uid://bw26kubkcvn57"]
+[gd_scene load_steps=129 format=4 uid="uid://bw26kubkcvn57"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
@@ -37,11 +37,10 @@
 [ext_resource type="Script" path="res://Scenes/music_player.gd" id="28_5ccab"]
 [ext_resource type="PackedScene" uid="uid://bfld41ywj425" path="res://Scenes/bonePile.tscn" id="30_pkjjd"]
 [ext_resource type="PackedScene" uid="uid://dwbdo3o6ytpff" path="res://Scenes/rope_segment.tscn" id="32_ctd2f"]
-[ext_resource type="Script" path="res://Scripts/physics/rope.gd" id="32_m7e8l"]
-[ext_resource type="Script" path="res://Scripts/physics/grapple_hook.gd" id="33_cm3kt"]
+[ext_resource type="Script" path="res://Scenes/rope.gd" id="32_m7e8l"]
+[ext_resource type="Script" path="res://Scenes/grapple_hook.gd" id="33_cm3kt"]
 [ext_resource type="PackedScene" uid="uid://b25p4y80d8n8x" path="res://Scenes/skeleton.tscn" id="34_lw7gy"]
 [ext_resource type="Texture2D" uid="uid://jh0undmmv6np" path="res://Sprites/rope_test.png" id="34_v0lcm"]
-[ext_resource type="Script" path="res://Scenes/rope_base.gd" id="36_i65yy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvucq"]
 texture = ExtResource("1_0hvgt")
@@ -893,9 +892,7 @@ radius = 2.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_breub"]
 radius = 5.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5i8p"]
-radius = 7.0
-height = 28.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_l7guw"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -974,6 +971,7 @@ BASE_JUMP_VELOCITY = -70
 momentum_max = 1.5
 friction = 0.03
 acceleration = 0.08
+run_threshold = null
 tile_map = NodePath("../TileMapLayer")
 
 [node name="StateContainer" type="Node2D" parent="Player"]
@@ -1084,6 +1082,7 @@ script = ExtResource("32_m7e8l")
 [node name="EndNode" type="RigidBody2D" parent="Player/Ropes"]
 position = Vector2(4, 4)
 collision_layer = 4
+mass = 10.0
 script = ExtResource("33_cm3kt")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Ropes/EndNode"]
@@ -1105,6 +1104,21 @@ position = Vector2(4, 4)
 node_a = NodePath("../../EndNode")
 softness = 0.0
 
+[node name="BaseNode" type="RigidBody2D" parent="Player/Ropes"]
+collision_layer = 4
+mass = 2.0
+
+[node name="BasePinJoint2D" type="PinJoint2D" parent="Player/Ropes/BaseNode"]
+node_a = NodePath("../../..")
+node_b = NodePath("../../EndNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Ropes/BaseNode"]
+shape = SubResource("CircleShape2D_l7guw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Ropes/BaseNode"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ej8y6")
+
 [node name="RopeRender" type="Line2D" parent="Player/Ropes"]
 texture_filter = 1
 texture_repeat = 2
@@ -1113,29 +1127,6 @@ width = 2.0
 texture = ExtResource("34_v0lcm")
 texture_mode = 1
 joint_mode = 2
-
-[node name="BaseNode" type="RigidBody2D" parent="Player/Ropes"]
-collision_layer = 4
-lock_rotation = true
-freeze = true
-script = ExtResource("36_i65yy")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Ropes/BaseNode"]
-shape = SubResource("CapsuleShape2D_p5i8p")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Ropes/BaseNode"]
-visible = false
-z_index = 3
-position = Vector2(0, 1.5)
-scale = Vector2(0.109375, 0.195312)
-texture = ExtResource("2_ej8y6")
-
-[node name="PinJoint2D" type="PinJoint2D" parent="Player/Ropes/BaseNode"]
-node_a = NodePath("..")
-node_b = NodePath("../../RopeSeg0")
-bias = 0.3
-
-[node name="PinHole" type="Node2D" parent="Player/Ropes/BaseNode"]
 
 [node name="Wind" type="Node" parent="." node_paths=PackedStringArray("wind_effect")]
 script = ExtResource("11_f62tx")

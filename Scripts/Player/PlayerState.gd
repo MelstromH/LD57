@@ -8,6 +8,7 @@ static var longjumpstart_state = LongJumpStarting.new()
 static var longjumping_state = LongJumping.new()
 static var climbing_up_state = ClimbingUp.new()
 static var climbing_down_state = ClimbingDown.new()
+static var rope_swinging_state = RopeSwinging.new()
 
 func switch_state(player : PlayerBody, state: PlayerState) : 
 	
@@ -40,10 +41,20 @@ class Standing extends PlayerState :
 				return false;
 				
 		if Input.is_action_just_pressed("Ladder") :
-			player.ropes.add_rope_segment()
-			player.ropes.add_rope_segment()
-			player.ropes.add_rope_segment()
-			player.ropes.add_rope_segment()
+			player.ropes.add_rope_segments(5)
+			player.ropes.end_node.freeze = false
+			
+		if Input.is_action_just_pressed("Click") :
+			var pos = player.ropes.end_node.global_position
+			player.ropes.end_node.top_level = true
+			player.ropes.end_node.position = pos
+			player.ropes.end_node.freeze = false
+			
+			var mouse_pos = player.get_global_mouse_position()
+			
+			#player.ropes.add_rope_segments(15)
+						
+			player.ropes.end_node.linear_velocity = pos.direction_to(mouse_pos) * 600
 			
 		if not player.is_on_floor() :
 			switch_state(player, PlayerState.longjumping_state)
@@ -216,6 +227,49 @@ class LongJumpStarting extends PlayerState :
 		player.velocity.y = player.actual_jump_velocity * 1.3
 		
 		switch_state(player, PlayerState.longjumping_state)
+		
+class RopeSwinging extends PlayerState :
+	
+	func get_name() -> String: return "RopeSwingingState"
+
+	func enter(player: PlayerBody) :
+		var pos = player.ropes.base_node.global_position
+		player.ropes.base_node.top_level = true
+		player.ropes.base_node.position = pos
+		player.ropes.base_node.set_deferred("freeze", false)
+		player.get_node("CollisionShape2D").disabled = true
+		
+	func update(player : PlayerBody, delta: float) -> bool :
+		var direction := Input.get_axis("Left", "Right")
+			
+		if direction :	
+			player.ropes.base_node.linear_velocity.x = (player.SPEED * direction) 
+			
+		if Input.is_action_just_pressed("Ladder") :
+			player.ropes.add_rope_segments(2)
+			player.ropes.end_node.freeze = false
+			switch_state(player, PlayerState.standing_state)
+			
+		if Input.is_action_pressed("Climb") :
+			player.ropes.move_base_up_chain()
+			
+		player.global_position = player.ropes.base_node.global_position
+		
+		if Input.is_action_just_pressed("Jump") :
+			if player.can_mantle :
+				switch_state(player, PlayerState.mantling_state)
+				return false;
+			else :
+				switch_state(player, PlayerState.longjumpstart_state)
+				return false;
+		
+		return true
+		
+	func exit(player : PlayerBody) : 
+		player.ropes.base_node.position = Vector2(0,0)
+		player.ropes.base_node.set_deferred("freeze", true)
+		player.ropes.base_node.top_level = false
+		player.ropes.base_node.detach_rope()
 		
 
 enum CharacterState {Standing = 1, Starting = 3, Walking = 4, Running = 5, Hopping = 6, Mantling = 7, LongJumpStarting = 8, HardLanding = 9, LethalLanding = 10, LongJumping = 11, ClimbingUp = 12, ClimbingDown = 13 }

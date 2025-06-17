@@ -45,43 +45,34 @@ background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+[node name="Test3dScene" type="Node3D"]
 
-[node name="SubViewport" type="SubViewport" parent="."]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-size = Vector2i(1440, 720)
-size_2d_override = Vector2i(360, 240)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="Hole" parent="SubViewport" instance=ExtResource("1_o0dg6")]
-
-[node name="SubViewport2" type="SubViewport" parent="."]
-handle_input_locally = false
-size = Vector2i(1440, 720)
-render_target_update_mode = 4
-
-[node name="Test3dScene" type="Node3D" parent="SubViewport2"]
-
-[node name="projection_surface" type="Node3D" parent="SubViewport2/Test3dScene"]
+[node name="projection_surface" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.4, 0, 0, 0)
 
-[node name="Plane" type="MeshInstance3D" parent="SubViewport2/Test3dScene/projection_surface"]
+[node name="Plane" type="MeshInstance3D" parent="projection_surface"]
 transform = Transform3D(1.02251e-13, -4.37114e-06, 100, -100, -4.37114e-06, -8.88178e-14, 4.37114e-06, -100, -4.37114e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_cpwch")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_ig11b")
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport2/Test3dScene"]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.983, 0, 0)
 fov = 34.9
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport2/Test3dScene"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4wfsy")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(360, 240)
+offset_right = 40.0
+offset_bottom = 40.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(360, 240)
+render_target_update_mode = 4
+
+[node name="Hole" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_o0dg6")]

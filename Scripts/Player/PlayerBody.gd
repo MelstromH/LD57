@@ -30,8 +30,10 @@ var momentum = 0;
 @onready var remote_transform_2d: RemoteTransform2D = $RemoteTransform2D
 @onready var spawn_point: Node2D = $SpawnPoint
 @onready var sounds: Node = $Sounds
-@onready var ropes: Node = $Ropes
+@onready var ropes: Rope = $Ropes
 
+func _ready() -> void: 
+	ropes.end_node.latch_signal.connect(on_grapple_latched)
 
 func _physics_process(delta: float) -> void:
 	state.update(self, delta)
@@ -109,5 +111,6 @@ func _on_mantle_detector_body_shape_exited(body_rid: RID, body: Node2D, body_sha
 
 	if tile && tile.get_custom_data("Mantleable") == true :
 		can_mantle = false
-		
-		
+
+func on_grapple_latched() :
+	state.switch_state(self, PlayerState.rope_swinging_state)

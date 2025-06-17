@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfld41ywj425"]
 
-[ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_26ntr"]
+[ext_resource type="Script" path="res://Scripts/Level/skeleton.gd" id="1_26ntr"]
 [ext_resource type="Texture2D" uid="uid://cuiksle644e0y" path="res://Sprites/EnvironmentObjects/BonePile.png" id="2_8tjgr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45crf"]
