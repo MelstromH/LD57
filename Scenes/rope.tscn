@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciwfnb3yx635m"]
+
+[ext_resource type="Script" path="res://Scripts/physics/rope.gd" id="1_78a8a"]
+[ext_resource type="PackedScene" uid="uid://bmxxflu15fbbm" path="res://Scenes/grapple_hook.tscn" id="2_k80ly"]
+[ext_resource type="PackedScene" uid="uid://dwbdo3o6ytpff" path="res://Scenes/rope_segment.tscn" id="3_8oqgc"]
+[ext_resource type="Texture2D" uid="uid://jh0undmmv6np" path="res://Sprites/rope_test.png" id="4_4g8d8"]
+
+[node name="Ropes" type="Node2D"]
+script = ExtResource("1_78a8a")
+
+[node name="EndNode" parent="." instance=ExtResource("2_k80ly")]
+
+[node name="RopeSeg0" parent="." instance=ExtResource("3_8oqgc")]
+position = Vector2(4, 4)
+
+[node name="PinJoint2D" parent="RopeSeg0" index="2"]
+node_a = NodePath("../../EndNode")
+softness = 0.0
+
+[node name="RopeRender" type="Line2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(0, 0)
+width = 2.0
+texture = ExtResource("4_4g8d8")
+texture_mode = 1
+joint_mode = 2
+
+[editable path="RopeSeg0"]

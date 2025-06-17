@@ -6,12 +6,13 @@ var anchor_location : Vector2
 @onready var last_segment : RopeSegment = first_segment
 @onready var end_node: RigidBody2D = $EndNode
 @onready var rope_render: Line2D = $RopeRender
-@onready var base_node: RopeSegment = $BaseNode
-@onready var base_pin_joint_2d: PinJoint2D = $BaseNode/PinJoint2D
+@onready var base_node: RopeSegment = $"../RopeConnector"
+@onready var base_pin_joint_2d: PinJoint2D = $"../RopeConnector/PinJoint2D"
 
 
 
 const ROPE_SEGMENT = preload("res://Scenes/rope_segment.tscn")
+const GRAPPLE_SEGMENT = preload("res://Scenes/grapple_hook.tscn")
 
 func _ready() -> void:
 	rope_render.top_level = true
@@ -51,8 +52,6 @@ func move_base_up_chain() :
 	if base_node.get_next_segment().get_next_segment() :
 		moving_base = true
 	else : moving_base = false
-
-
 
 func add_rope_segment() :
 	var new_seg = ROPE_SEGMENT.instantiate()

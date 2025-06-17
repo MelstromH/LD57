@@ -32,6 +32,8 @@ var momentum = 0;
 @onready var sounds: Node = $Sounds
 @onready var ropes: Rope = $Ropes
 
+const ROPE_SEGMENT = preload("res://Scenes/rope.tscn")
+
 func _ready() -> void: 
 	ropes.end_node.latch_signal.connect(on_grapple_latched)
 
@@ -114,3 +116,15 @@ func _on_mantle_detector_body_shape_exited(body_rid: RID, body: Node2D, body_sha
 
 func on_grapple_latched() :
 	state.switch_state(self, PlayerState.rope_swinging_state)
+	
+func create_new_rope() :
+	#ropes.reparent(get_parent())
+	ropes.end_node.latch_signal.disconnect(on_grapple_latched)
+	
+	var new_rope = ROPE_SEGMENT.instantiate()
+	add_child(new_rope)
+	new_rope.end_node.latch_signal.connect(on_grapple_latched)
+	ropes.base_pin_joint_2d.node_b = new_rope.last_segment.get_path()
+	ropes = new_rope
+	
+	

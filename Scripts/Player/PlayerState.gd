@@ -49,7 +49,7 @@ class Standing extends PlayerState :
 			player.ropes.end_node.top_level = true
 			player.ropes.end_node.position = pos
 			player.ropes.end_node.freeze = false
-			
+			player.ropes.end_node.can_latch = true
 			var mouse_pos = player.get_global_mouse_position()
 			
 			#player.ropes.add_rope_segments(15)
@@ -243,11 +243,13 @@ class RopeSwinging extends PlayerState :
 		var direction := Input.get_axis("Left", "Right")
 			
 		if direction :	
-			player.ropes.base_node.linear_velocity.x = (player.SPEED * direction) 
+			player.ropes.base_node.linear_velocity.x = (player.SPEED * direction / 10) + player.ropes.base_node.linear_velocity.x
+			player.set_direction_facing(player.ropes.base_node.linear_velocity.x)
 			
 		if Input.is_action_just_pressed("Ladder") :
 			player.ropes.add_rope_segments(2)
-			player.ropes.end_node.freeze = false
+			#player.ropes.end_node.freeze = false
+
 			switch_state(player, PlayerState.standing_state)
 			
 		if Input.is_action_pressed("Climb") :
@@ -260,7 +262,7 @@ class RopeSwinging extends PlayerState :
 				switch_state(player, PlayerState.mantling_state)
 				return false;
 			else :
-				switch_state(player, PlayerState.longjumpstart_state)
+				switch_state(player, PlayerState.longjumping_state)
 				return false;
 		
 		return true
@@ -270,6 +272,10 @@ class RopeSwinging extends PlayerState :
 		player.ropes.base_node.set_deferred("freeze", true)
 		player.ropes.base_node.top_level = false
 		player.ropes.base_node.detach_rope()
+		player.momentum = player.ropes.base_node.linear_velocity.x / player.SPEED
+		player.velocity.y = player.ropes.base_node.linear_velocity.y - 30
+		
+		player.create_new_rope()
 		
 
 enum CharacterState {Standing = 1, Starting = 3, Walking = 4, Running = 5, Hopping = 6, Mantling = 7, LongJumpStarting = 8, HardLanding = 9, LethalLanding = 10, LongJumping = 11, ClimbingUp = 12, ClimbingDown = 13 }

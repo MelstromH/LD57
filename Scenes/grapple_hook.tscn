@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmxxflu15fbbm"]
+
+[ext_resource type="Script" path="res://Scripts/physics/grapple_hook.gd" id="1_psh1o"]
+
+[sub_resource type="Gradient" id="Gradient_qk7sv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mjqav"]
+gradient = SubResource("Gradient_qk7sv")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gr14t"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_breub"]
+radius = 5.0
+
+[node name="EndNode" type="RigidBody2D"]
+position = Vector2(4, 4)
+collision_layer = 4
+script = ExtResource("1_psh1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = SubResource("GradientTexture2D_mjqav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gr14t")
+disabled = true
+
+[node name="GrappleDetector" type="Area2D" parent="."]
+
+[node name="GrappleDetectorShape" type="CollisionShape2D" parent="GrappleDetector"]
+shape = SubResource("CircleShape2D_breub")
+
+[connection signal="body_shape_entered" from="GrappleDetector" to="." method="_on_grapple_detector_body_shape_entered"]

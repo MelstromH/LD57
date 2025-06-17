@@ -1,8 +1,8 @@
 extends RopeSegment
 class_name RopeBase
 
-@onready var player: PlayerBody = $"../.."
-@onready var tile_map_layer: TileMapLayer = $"../../../TileMapLayer"
+@onready var player: PlayerBody = $".."
+@onready var tile_map_layer: TileMapLayer = $"../../TileMapLayer"
 
 func _process(delta: float) -> void:
 	
