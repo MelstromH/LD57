@@ -7,13 +7,16 @@ class_name RopeSegment
 var rope : Rope
 var next_segment : RopeSegment
 var previous_segment : RopeSegment
+var natural_distance : float
 
 func _ready() -> void:
 	var pos = global_position
 	top_level = true
 	global_position = pos
+	natural_distance = pin_hole.global_position.distance_to(pin_joint_2d.global_position)
 
 func _process(delta: float) -> void:
+
 	pass
 	
 func get_next_segment() -> RopeSegment:

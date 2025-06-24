@@ -39,6 +39,12 @@ func _process(delta: float) -> void:
 	
 	update_renderer_points_recursive(last_segment)
 	
+
+	if get_desired_rope_length(last_segment, 0) < get_actual_length() * 0.8 :
+		end_node.linear_velocity = 20 * end_node.global_position.direction_to(last_segment.global_position)
+		print("Desired: " + str(get_desired_rope_length(last_segment, 0)) + ", Actual: " + str(get_actual_length()))
+		pass
+	
 func update_renderer_points_recursive(segment: RopeSegment, index: int = 0) :
 	if segment == null || segment == end_node :
 		return
@@ -86,3 +92,14 @@ func remove_rope_segment():
 	rope_render.remove_point(rope_render.points.size() -1)
 	
 	last_segment = previous_segment
+	
+func get_desired_rope_length(segment: RopeSegment, length: float) -> float :
+	if segment == null || segment == end_node :
+		return length
+	
+	length += segment.natural_distance
+	
+	return get_desired_rope_length(segment.get_next_segment(), length)
+	
+func get_actual_length() -> float :
+	return last_segment.global_position.distance_to(end_node.global_position)

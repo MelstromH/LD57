@@ -16,6 +16,8 @@ radius = 5.0
 [node name="EndNode" type="RigidBody2D"]
 position = Vector2(4, 4)
 collision_layer = 4
+gravity_scale = 0.6
+linear_damp = 1.0
 script = ExtResource("1_psh1o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

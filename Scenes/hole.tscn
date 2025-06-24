@@ -1,10 +1,11 @@
-[gd_scene load_steps=123 format=4 uid="uid://bw26kubkcvn57"]
+[gd_scene load_steps=126 format=4 uid="uid://bw26kubkcvn57"]
 
 [ext_resource type="Texture2D" uid="uid://88dws7nqapr" path="res://Sprites/Tiles/BrittleHeart_Placeholder_Tiles.png" id="1_0hvgt"]
 [ext_resource type="Script" path="res://Scripts/Level/looping_tile_map.gd" id="2_0djjo"]
 [ext_resource type="Texture2D" uid="uid://bawbby34an5l1" path="res://Sprites/Lizard/BrittleheartLizard.png" id="2_e3j5j"]
 [ext_resource type="Texture2D" uid="uid://nh4ey2muxt0w" path="res://Sprites/icon.svg" id="2_ej8y6"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBody.gd" id="2_h45im"]
+[ext_resource type="Texture2D" uid="uid://knn2huhmhng7" path="res://Sprites/Effects/crt_tiled.png" id="2_m4gck"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="2_p0klu"]
 [ext_resource type="Script" path="res://Scripts/UI/bone_container.gd" id="3_82hoc"]
 [ext_resource type="Script" path="res://Scripts/Player/character_data.gd" id="4_054vt"]
@@ -39,6 +40,13 @@
 [ext_resource type="PackedScene" uid="uid://ciwfnb3yx635m" path="res://Scenes/rope.tscn" id="32_kwin2"]
 [ext_resource type="PackedScene" uid="uid://b25p4y80d8n8x" path="res://Scenes/skeleton.tscn" id="34_lw7gy"]
 [ext_resource type="Script" path="res://Scripts/physics/rope_base.gd" id="36_i65yy"]
+[ext_resource type="Shader" path="res://Scenes/CRT.gdshader" id="40_7qa2q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omror"]
+shader = ExtResource("40_7qa2q")
+shader_parameter/screen_size = Vector2(240, 135)
+shader_parameter/overlay_intensity = 0.65
+shader_parameter/pixel_texture = ExtResource("2_m4gck")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvucq"]
 texture = ExtResource("1_0hvgt")
@@ -884,6 +892,16 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_omror")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(30, 18)

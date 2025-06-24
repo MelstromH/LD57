@@ -44,6 +44,8 @@ shadow_mesh = SubResource("ArrayMesh_7k78u")
 background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+glow_bloom = 1.0
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
 anchors_preset = 15
@@ -56,8 +58,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(1440, 720)
-size_2d_override = Vector2i(360, 240)
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(480, 270)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -65,7 +67,7 @@ render_target_update_mode = 4
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(1440, 720)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Test3dScene" type="Node3D" parent="SubViewport2"]
