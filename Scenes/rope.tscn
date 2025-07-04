@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciwfnb3yx635m"]
 
-[ext_resource type="Script" path="res://Scripts/physics/rope.gd" id="1_78a8a"]
+[ext_resource type="Script" uid="uid://b8yj23f5eyp1c" path="res://Scripts/physics/rope.gd" id="1_78a8a"]
 [ext_resource type="PackedScene" uid="uid://bmxxflu15fbbm" path="res://Scenes/grapple_hook.tscn" id="2_k80ly"]
 [ext_resource type="PackedScene" uid="uid://dwbdo3o6ytpff" path="res://Scenes/rope_segment.tscn" id="3_8oqgc"]
 [ext_resource type="Texture2D" uid="uid://jh0undmmv6np" path="res://Sprites/rope_test.png" id="4_4g8d8"]

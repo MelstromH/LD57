@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bmxxflu15fbbm"]
 
-[ext_resource type="Script" path="res://Scripts/physics/grapple_hook.gd" id="1_psh1o"]
+[ext_resource type="Script" uid="uid://de2b3qr7fywix" path="res://Scripts/physics/grapple_hook.gd" id="1_psh1o"]
 
 [sub_resource type="Gradient" id="Gradient_qk7sv"]
 
