@@ -26,7 +26,8 @@ func get_next_segment() -> RopeSegment:
 		return next_segment
 
 func set_next_segment(next_seg : RopeSegment) :
+	print(next_seg)
 	global_position = next_seg.pin_hole.global_position
 	pin_joint_2d.node_b = next_seg.get_path()
 	next_segment = next_seg
-	next_seg.previous_segment = self
+	previous_segment = next_seg.previous_segment

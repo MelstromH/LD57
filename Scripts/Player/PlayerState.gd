@@ -255,6 +255,9 @@ class RopeSwinging extends PlayerState :
 		if Input.is_action_pressed("Climb") :
 			player.ropes.move_base_up_chain()
 			
+		if Input.is_action_pressed("Down") :
+			player.ropes.move_base_down_chain()
+			
 		player.global_position = player.ropes.base_node.global_position
 		
 		if Input.is_action_just_pressed("Jump") :

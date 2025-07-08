@@ -20,22 +20,32 @@ func _ready() -> void:
 	pass
 
 var timer = 0
-var moving_base = false
+var moving_base_up = false
+var moving_base_down = false
 func _process(delta: float) -> void:
 	if timer > 60 :
 		if !end_node.freeze :
 			remove_rope_segment()
-		if moving_base :
+		if moving_base_up :
 			
 			var next_segment = base_node.get_next_segment().get_next_segment()
 			base_node.set_next_segment(next_segment)
-			moving_base = false
+			moving_base_up = false
+		
+		if moving_base_down :
 			
+			var prev_segment = base_node.previous_segment
+			base_node.set_next_segment(prev_segment)
+			moving_base_down = false
+		
 		timer = 0
 	timer += 1
 	
-	if moving_base :
+	if moving_base_up :
 		base_node.global_position = base_node.global_position.move_toward(base_node.get_next_segment().get_next_segment().pin_hole.global_position, 0.2)
+		
+	if moving_base_down :
+		base_node.global_position = base_node.global_position.move_toward(base_node.previous_segment.previous_segment.pin_hole.global_position, 0.2)
 	
 	update_renderer_points_recursive(last_segment)
 	
@@ -56,8 +66,13 @@ func update_renderer_points_recursive(segment: RopeSegment, index: int = 0) :
 	
 func move_base_up_chain() :
 	if base_node.get_next_segment().get_next_segment() :
-		moving_base = true
-	else : moving_base = false
+		moving_base_up = true
+	else : moving_base_up = false
+	
+func move_base_down_chain() :
+	if base_node.previous_segment && base_node.previous_segment.previous_segment :
+		moving_base_down = true
+	else : moving_base_down = false
 
 func add_rope_segment() :
 	var new_seg = ROPE_SEGMENT.instantiate()
