@@ -118,3 +118,9 @@ func get_desired_rope_length(segment: RopeSegment, length: float) -> float :
 	
 func get_actual_length() -> float :
 	return last_segment.global_position.distance_to(end_node.global_position)
+	
+func detach_base_node():
+	base_node.position = Vector2(0,0)
+	base_node.set_deferred("freeze", true)
+	base_node.top_level = false
+	base_node.detach_rope()

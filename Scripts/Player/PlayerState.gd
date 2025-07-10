@@ -233,10 +233,7 @@ class RopeSwinging extends PlayerState :
 	func get_name() -> String: return "RopeSwingingState"
 
 	func enter(player: PlayerBody) :
-		var pos = player.ropes.base_node.global_position
-		player.ropes.base_node.top_level = true
-		player.ropes.base_node.position = pos
-		player.ropes.base_node.set_deferred("freeze", false)
+		player.ropes.base_node.hang_player()
 		player.get_node("CollisionShape2D").disabled = true
 		
 	func update(player : PlayerBody, delta: float) -> bool :
@@ -249,7 +246,6 @@ class RopeSwinging extends PlayerState :
 		if Input.is_action_just_pressed("Ladder") :
 			player.ropes.add_rope_segments(2)
 			#player.ropes.end_node.freeze = false
-
 			switch_state(player, PlayerState.standing_state)
 			
 		if Input.is_action_pressed("Climb") :
@@ -271,10 +267,8 @@ class RopeSwinging extends PlayerState :
 		return true
 		
 	func exit(player : PlayerBody) : 
-		player.ropes.base_node.position = Vector2(0,0)
-		player.ropes.base_node.set_deferred("freeze", true)
-		player.ropes.base_node.top_level = false
-		player.ropes.base_node.detach_rope()
+		player.ropes.detach_base_node()
+
 		player.momentum = player.ropes.base_node.linear_velocity.x / player.SPEED
 		player.velocity.y = player.ropes.base_node.linear_velocity.y - 30
 		

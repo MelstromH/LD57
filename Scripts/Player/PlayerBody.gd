@@ -120,7 +120,6 @@ func on_grapple_latched() :
 func create_new_rope() :
 	#ropes.reparent(get_parent())
 	ropes.end_node.latch_signal.disconnect(on_grapple_latched)
-	
 	var new_rope = ROPE_SEGMENT.instantiate()
 	add_child(new_rope)
 	new_rope.end_node.latch_signal.connect(on_grapple_latched)

@@ -15,6 +15,12 @@ func _process(delta: float) -> void:
 func detach_rope() :
 	next_segment = null
 	pin_joint_2d.node_b = ""
+	
+func hang_player() :
+	var pos = player.ropes.base_node.global_position
+	top_level = true
+	position = pos
+	set_deferred("freeze", false)
 
 func get_next_segment() -> RopeSegment:
 	if !next_segment :
