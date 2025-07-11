@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/test3DScene.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://Sprites/icon.svg"
 
+[autoload]
+
+SignalHub="*res://Scripts/Level/signal_hub.gd"
+
 [display]
 
 window/size/viewport_width=1920

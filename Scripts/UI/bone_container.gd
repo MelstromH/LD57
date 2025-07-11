@@ -6,7 +6,7 @@ var bones : Array[Node]
 func _ready() :
 	bones = get_children()
 	state_container = get_node("%StateContainer")
-	state_container.subscribe_bones(self)
+	#state_container.subscribe_bones(self)
 	
 func update_bones(current_bones : int) :
 	for i in 3 :

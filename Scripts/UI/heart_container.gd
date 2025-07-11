@@ -10,7 +10,8 @@ const FULL_HEART = preload("res://Sprites/UI/Full_Heart.png")
 func _ready() :
 	hearts = get_children()
 	state_container = get_node("%StateContainer")
-	state_container.subscribe_health(self)
+	
+	SignalHub.player_health_changed.connect(update_health)
 	
 func update_health(current_health : int) :
 	for i in 5 :

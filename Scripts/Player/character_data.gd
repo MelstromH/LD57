@@ -3,7 +3,6 @@ extends Node2D
 @export var max_health = 5
 var current_health
 
-var health_listeners : Array[Node]
 var bone_listeners : Array[Node]
 
 var in_wind : bool = false
@@ -27,9 +26,8 @@ var bone_pile_scene : PackedScene
 @onready var get_bone: AudioStreamPlayer = $"../Sounds/GetBone"
 
 var grace_period = false
-	
-func subscribe_health(listener: Node) :
-	health_listeners.append(listener)
+
+signal health_changed_signal(new_amount: int)
 
 func subscribe_bones(listener: Node) :
 	bone_listeners.append(listener)
@@ -47,8 +45,8 @@ func _ready() :
 	bone_pile_scene = load("res://Scenes/skeleton.tscn")
 	current_health = max_health
 	number_scraps = default_scraps
-	for listener in health_listeners :
-		listener.update_health(current_health)
+	
+	SignalHub.player_health_changed.emit(current_health)
 		
 	for listener in bone_listeners :
 		listener.update_bones(number_scraps)
@@ -68,8 +66,8 @@ func reset() :
 	current_health = max_health
 	number_scraps = default_scraps
 	
-	for listener in health_listeners :
-		listener.update_health(current_health)
+	SignalHub.player_health_changed.emit(current_health)
+	
 	await get_tree().create_timer(1).timeout
 	
 	update_bone_listeners()
@@ -79,15 +77,13 @@ func reset() :
 	
 func damage(dmg : int) :
 	if grace_period : 
-		for listener in health_listeners :
-			listener.update_health(current_health)
+		SignalHub.player_health_changed.emit(current_health)
 		return
 	
 	print("damage: " + str(dmg) + " health: " + str(current_health))
 	current_health -= dmg
 	
-	for listener in health_listeners :
-		listener.update_health(current_health)
+	SignalHub.player_health_changed.emit(current_health)
 		
 	if current_health <= 0 :
 		reset()
