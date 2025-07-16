@@ -290,18 +290,6 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("10_nv4vc")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uv51t"]
-atlas = ExtResource("10_nv4vc")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kfwt"]
-atlas = ExtResource("10_nv4vc")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x35mt"]
-atlas = ExtResource("10_nv4vc")
-region = Rect2(128, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6kdce"]
 atlas = ExtResource("11_8gxox")
 region = Rect2(0, 0, 48, 64)
@@ -369,6 +357,18 @@ region = Rect2(192, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4o67"]
 atlas = ExtResource("12_11gg7")
 region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv51t"]
+atlas = ExtResource("10_nv4vc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kfwt"]
+atlas = ExtResource("10_nv4vc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x35mt"]
+atlas = ExtResource("10_nv4vc")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5wm8"]
 atlas = ExtResource("13_qpa8y")
@@ -629,19 +629,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_42g4f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uv51t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1kfwt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x35mt")
 }],
 "loop": false,
 "name": &"longjumpstart",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -703,6 +694,20 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv51t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kfwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x35mt")
+}],
+"loop": true,
+"name": &"startofjump",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -830,15 +835,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("tile_map")]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_0gysh")
-SPEED = 30
-BASE_JUMP_VELOCITY = -70
-momentum_max = 1.5
+SPEED = 45
+BASE_JUMP_VELOCITY = -80
+momentum_max = 1.0
 friction = 0.03
-acceleration = 0.08
-tile_map = NodePath("")
+acceleration = 0.1
+run_threshold = 0.4
 
 [node name="RopeConnector" type="RigidBody2D" parent="."]
 collision_layer = 4
@@ -875,7 +880,7 @@ shape = SubResource("RectangleShape2D_cwvnk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_yb2ig")
-animation = &"run"
+animation = &"longjumpstart"
 script = ExtResource("14_sbwqj")
 
 [node name="MantleTeleportLocation" type="Node2D" parent="."]
