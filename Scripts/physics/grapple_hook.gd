@@ -10,9 +10,10 @@ signal latch_signal()
 
 func _ready() -> void:
 	pin_hole = self
-	var pos = global_position
-	top_level = true
-	position = pos
+	set_deferred("freeze", true)
+	#var pos = global_position
+	#top_level = true
+	#position = pos
 
 func get_next_segment() -> RopeSegment:
 	return null

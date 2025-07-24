@@ -126,4 +126,7 @@ func create_new_rope() :
 	ropes.base_pin_joint_2d.node_b = new_rope.last_segment.get_path()
 	ropes = new_rope
 	
+func calculate_drag() :
+	momentum = move_toward(momentum, 0, friction * abs(momentum/momentum_max) + friction)
+	
 	

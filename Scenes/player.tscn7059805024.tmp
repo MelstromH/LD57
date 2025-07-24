@@ -864,6 +864,7 @@ shape = SubResource("CapsuleShape2D_p5i8p")
 
 [node name="Sprite2D" type="Sprite2D" parent="RopeConnector"]
 visible = false
+z_index = 3
 position = Vector2(0, 1.5)
 scale = Vector2(0.109375, 0.195312)
 texture = ExtResource("3_y6uwr")

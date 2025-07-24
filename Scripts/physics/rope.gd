@@ -81,13 +81,35 @@ func add_rope_segment() :
 	
 	new_seg.set_next_segment(last_segment)
 	
+	base_node.global_position = new_seg.global_position
 	base_pin_joint_2d.node_b = new_seg.get_path()
+	
 	last_segment = new_seg
 	rope_render.add_point(new_seg.global_position)
+	
+func add_rope_segment_at_end() :
+	var new_seg = ROPE_SEGMENT.instantiate()
+	add_child(new_seg)
+	new_seg.rope = self
+	
+	first_segment.set_next_segment(new_seg)
+	
+	var pos = end_node.global_position
+	end_node.global_position = new_seg.global_position
+	new_seg.set_next_segment(end_node)
+	end_node.global_position = pos
+	
+	first_segment = new_seg
+	rope_render.add_point(new_seg.global_position)
+	
 	
 func add_rope_segments(count: int) :
 	for i in count :
 		add_rope_segment()
+		
+func add_rope_segments_at_end(count: int) :
+	for i in count :
+		add_rope_segment_at_end()
 
 func remove_rope_segment():
 	if last_segment == first_segment:
@@ -124,3 +146,10 @@ func detach_base_node():
 	base_node.set_deferred("freeze", true)
 	base_node.top_level = false
 	base_node.detach_rope()
+	
+func arm_grapple():
+	var pos = end_node.global_position
+	end_node.top_level = true
+	end_node.position = pos
+	end_node.freeze = false
+	end_node.can_latch = true

@@ -9,6 +9,7 @@ static var longjumping_state = LongJumping.new()
 static var climbing_up_state = ClimbingUp.new()
 static var climbing_down_state = ClimbingDown.new()
 static var rope_swinging_state = RopeSwinging.new()
+static var crouching_state = Crouching.new()
 
 func switch_state(player : PlayerBody, state: PlayerState) : 
 	
@@ -42,19 +43,16 @@ class Standing extends PlayerState :
 				
 		if Input.is_action_just_pressed("Ladder") :
 			player.ropes.add_rope_segments(5)
-			player.ropes.end_node.freeze = false
+			#player.ropes.end_node.freeze = false
+			
+		if Input.is_action_just_pressed("Down") :
+			switch_state(player, PlayerState.crouching_state)
+			return false;
 			
 		if Input.is_action_just_pressed("Click") :
-			var pos = player.ropes.end_node.global_position
-			player.ropes.end_node.top_level = true
-			player.ropes.end_node.position = pos
-			player.ropes.end_node.freeze = false
-			player.ropes.end_node.can_latch = true
+			player.ropes.arm_grapple()
 			var mouse_pos = player.get_global_mouse_position()
-			
-			#player.ropes.add_rope_segments(15)
-						
-			player.ropes.end_node.linear_velocity = pos.direction_to(mouse_pos) * 600
+			player.ropes.end_node.linear_velocity = player.ropes.end_node.global_position.direction_to(mouse_pos) * 600
 			
 		if not player.is_on_floor() :
 			switch_state(player, PlayerState.longjumping_state)
@@ -79,10 +77,10 @@ class Standing extends PlayerState :
 			
 			#calculate drag
 			player.momentum = move_toward(player.momentum, 0, player.friction * abs(player.momentum/player.momentum_max) + player.friction)
-				
-			player.set_direction_facing(player.velocity.x)
 			
 			player.state_container.last_grounded_location = player.tile_map.map_to_local(player.tile_map.local_to_map(player.position))
+			
+			player.set_direction_facing(player.velocity.x)
 		
 		return true;
 		#print("velocity: " + str(player.velocity.x))
@@ -166,8 +164,8 @@ class ClimbingUp extends PlayerState :
 		var direction := Input.get_axis("Left", "Right")
 			
 		player.momentum += (direction) * (player.acceleration)
-		#calculate drag
-		player.momentum = move_toward(player.momentum, 0, player.friction + (player.friction/2 * abs(player.momentum)))	
+
+		player.calculate_drag()
 		
 		player.set_direction_facing(player.velocity.x)
 		
@@ -275,4 +273,4 @@ class RopeSwinging extends PlayerState :
 		player.create_new_rope()
 		
 
-enum CharacterState {Standing = 1, Starting = 3, Walking = 4, Running = 5, Hopping = 6, Mantling = 7, LongJumpStarting = 8, HardLanding = 9, LethalLanding = 10, LongJumping = 11, ClimbingUp = 12, ClimbingDown = 13 }
+enum CharacterState {Standing = 1, Starting = 3, Walking = 4, Running = 5, Hopping = 6, Mantling = 7, LongJumpStarting = 8, HardLanding = 9, LethalLanding = 10, LongJumping = 11, ClimbingUp = 12, ClimbingDown = 13, Crouching = 14 }

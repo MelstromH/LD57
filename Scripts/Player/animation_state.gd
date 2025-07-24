@@ -49,6 +49,8 @@ func set_state(character_state) :
 			play("walk")
 		PlayerState.CharacterState.ClimbingDown : 
 			play_backwards("walk")
+		PlayerState.CharacterState.Crouching : 
+			play_backwards("crouch")
 		
 func wait_for_animation() :
 	

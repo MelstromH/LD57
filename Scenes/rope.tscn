@@ -9,6 +9,7 @@
 script = ExtResource("1_78a8a")
 
 [node name="EndNode" parent="." instance=ExtResource("2_k80ly")]
+position = Vector2(4, 4)
 
 [node name="RopeSeg0" parent="." instance=ExtResource("3_8oqgc")]
 position = Vector2(4, 4)
@@ -18,6 +19,7 @@ node_a = NodePath("../../EndNode")
 softness = 0.0
 
 [node name="RopeRender" type="Line2D" parent="."]
+z_index = 1
 texture_filter = 1
 texture_repeat = 2
 points = PackedVector2Array(0, 0)
