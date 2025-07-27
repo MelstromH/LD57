@@ -13,16 +13,8 @@ func update(player : PlayerBody, delta: float) -> bool :
 		player.ropes.detach_base_node()
 		
 	if Input.is_action_just_pressed("Click") :
-		var pos = player.ropes.end_node.global_position
-		player.ropes.end_node.top_level = true
-		player.ropes.end_node.position = pos
-		player.ropes.end_node.freeze = false
-		player.ropes.end_node.can_latch = true
-		var mouse_pos = player.get_global_mouse_position()
-		
-		#player.ropes.add_rope_segments(15)
-					
-		player.ropes.end_node.linear_velocity = pos.direction_to(mouse_pos) * 600
+		player.anchor_rope()
+		player.ropes.move_base_to_top()
 		
 	if not player.is_on_floor() :
 		switch_state(player, PlayerState.longjumping_state)

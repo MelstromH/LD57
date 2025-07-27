@@ -31,6 +31,7 @@ var momentum = 0;
 @onready var spawn_point: Node2D = $SpawnPoint
 @onready var sounds: Node = $Sounds
 @onready var ropes: Rope = $Ropes
+@onready var temp_foot_loc: Node2D = $TEMP_foot_loc
 
 const ROPE_SEGMENT = preload("res://Scenes/rope.tscn")
 
@@ -129,4 +130,6 @@ func create_new_rope() :
 func calculate_drag() :
 	momentum = move_toward(momentum, 0, friction * abs(momentum/momentum_max) + friction)
 	
-	
+func anchor_rope() :
+	ropes.anchor_rope_at_location(temp_foot_loc.global_position)
+	state.switch_state(self, PlayerState.rope_swinging_state)

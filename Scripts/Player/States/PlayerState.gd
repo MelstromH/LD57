@@ -270,6 +270,8 @@ class RopeSwinging extends PlayerState :
 		player.momentum = player.ropes.base_node.linear_velocity.x / player.SPEED
 		player.velocity.y = player.ropes.base_node.linear_velocity.y - 30
 		
+		player.get_node("CollisionShape2D").disabled = false
+		
 		player.create_new_rope()
 		
 

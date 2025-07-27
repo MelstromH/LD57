@@ -153,3 +153,15 @@ func arm_grapple():
 	end_node.position = pos
 	end_node.freeze = false
 	end_node.can_latch = true
+	
+func anchor_rope_at_location(location: Vector2):
+	end_node.top_level = true
+	end_node.global_position = location
+	set_deferred("freeze", true)
+	pass
+
+func move_base_to_top():
+	base_node.global_position = first_segment.previous_segment.previous_segment.global_position
+	base_pin_joint_2d.node_b = first_segment.previous_segment.previous_segment.get_path()
+	base_node.previous_segment = first_segment.previous_segment
+	pass
