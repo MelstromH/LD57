@@ -50,6 +50,9 @@ func _ready() :
 		
 	for listener in bone_listeners :
 		listener.update_bones(number_scraps)
+		
+	SignalHub.wind_activated.connect(set_in_wind_true)
+	SignalHub.wind_deactivated.connect(set_in_wind_false)
 	
 func reset() :
 	
@@ -99,6 +102,15 @@ func update_bone_listeners() :
 	for listener in bone_listeners :
 		listener.update_bones(number_scraps)
 	
+func set_in_wind_true() :
+	in_wind = true 	
+	gravity_multiplier = 0.5
+	print("wind detected")
+
+func set_in_wind_false() :
+	in_wind = false 	
+	gravity_multiplier = 1
+
 func handle_radiation() :
 	if in_wind && not in_shelter :
 		rad_timer += 1
