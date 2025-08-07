@@ -193,6 +193,9 @@ class Mantling extends PlayerState :
 	func enter(player : PlayerBody) :
 		
 		player.momentum = 0
+		player.velocity.y = 0
+		player.ropes.moving_base_up = false
+		player.ropes.moving_base_down = false
 		player.animation_controller.set_state(PlayerState.CharacterState.Mantling)
 		
 		#camera control

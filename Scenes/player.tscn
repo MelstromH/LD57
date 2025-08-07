@@ -887,7 +887,9 @@ shape = SubResource("RectangleShape2D_cwvnk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_yb2ig")
-animation = &"crouch"
+animation = &"mantel"
+frame = 8
+frame_progress = 1.0
 script = ExtResource("14_sbwqj")
 
 [node name="MantleTeleportLocation" type="Node2D" parent="."]

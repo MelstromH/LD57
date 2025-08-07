@@ -37,6 +37,9 @@ const ROPE_SEGMENT = preload("res://Scenes/rope.tscn")
 
 func _ready() -> void: 
 	ropes.end_node.latch_signal.connect(on_grapple_latched)
+	var pos = mantle_location.global_position
+	mantle_location.top_level = true
+	mantle_location.global_position = pos
 
 func _physics_process(delta: float) -> void:
 	state.update(self, delta)
@@ -106,6 +109,7 @@ func _on_mantle_detector_body_shape_entered(body_rid: RID, body: Node2D, body_sh
 	var tile = tile_map.get_cell_tile_data(coords)
 
 	if tile && tile.get_custom_data("Mantleable") == true :
+		mantle_location.global_position = tile_map.map_to_local(coords) + tile.get_custom_data("MantleLocation")
 		can_mantle = true
 
 func _on_mantle_detector_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
