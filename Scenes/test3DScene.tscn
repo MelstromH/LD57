@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://b7h68evby3me3"]
 
+[ext_resource type="PackedScene" uid="uid://bolaf2ur1qk77" path="res://Scenes/second_sun.tscn" id="1_f7qe7"]
 [ext_resource type="Material" uid="uid://cvq60epa5x6s8" path="res://Models/projection_mat.tres" id="1_ig11b"]
-[ext_resource type="PackedScene" uid="uid://bw26kubkcvn57" path="res://Scenes/hole.tscn" id="1_o0dg6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ms3c0"]
 
@@ -97,7 +97,7 @@ size_2d_override = Vector2i(480, 270)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Hole" parent="SubViewport" instance=ExtResource("1_o0dg6")]
+[node name="second_sun" parent="SubViewport" instance=ExtResource("1_f7qe7")]
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 handle_input_locally = false
