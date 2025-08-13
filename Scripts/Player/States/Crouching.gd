@@ -5,6 +5,9 @@ func get_name() -> String : return "Crouching"
 func enter(player : PlayerBody) :
 	player.animation_controller.set_state(PlayerState.CharacterState.Crouching)
 	
+	if(player.ropes.get_rope_segment_count() < 2) :
+		player.ropes.hold_grapple()
+	
 func update(player : PlayerBody, delta: float) -> bool :
 			
 	if Input.is_action_just_pressed("Ladder") :

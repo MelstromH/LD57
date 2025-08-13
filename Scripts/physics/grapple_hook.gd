@@ -11,9 +11,7 @@ signal latch_signal()
 func _ready() -> void:
 	pin_hole = self
 	set_deferred("freeze", true)
-	#var pos = global_position
-	#top_level = true
-	#position = pos
+
 
 func get_next_segment() -> RopeSegment:
 	return null
@@ -25,5 +23,9 @@ func _on_grapple_detector_body_shape_entered(body_rid: RID, body: Node2D, body_s
 	if tile && tile.get_custom_data("Mantleable") == true && can_latch:
 		print("grapple collided")
 		set_deferred("freeze", true)
+		
+		var pos = global_position
+		top_level = true
+		position = pos
 		
 		emit_signal("latch_signal")

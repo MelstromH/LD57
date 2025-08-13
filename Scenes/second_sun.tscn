@@ -624,7 +624,6 @@ sources/1 = SubResource("TileSetAtlasSource_02oef")
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_omror")

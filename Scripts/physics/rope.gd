@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 	if timer > 60 :
 		if !end_node.freeze :
 			remove_rope_segment()
+			remove_rope_segment()
 		if moving_base_up :
 			
 			var next_segment = base_node.get_next_segment().get_next_segment()
@@ -39,7 +40,7 @@ func _process(delta: float) -> void:
 			moving_base_down = false
 		
 		timer = 0
-	timer += 1
+	timer += 1 
 	
 	if moving_base_up :
 		base_node.global_position = base_node.global_position.move_toward(base_node.get_next_segment().get_next_segment().pin_hole.global_position, 0.2)
@@ -54,6 +55,9 @@ func _process(delta: float) -> void:
 		end_node.linear_velocity = 20 * end_node.global_position.direction_to(last_segment.global_position)
 		print("Desired: " + str(get_desired_rope_length(last_segment, 0)) + ", Actual: " + str(get_actual_length()))
 		pass
+		
+func get_rope_segment_count() -> int :
+	return 	rope_render.get_point_count()
 	
 func update_renderer_points_recursive(segment: RopeSegment, index: int = 0) :
 	if segment == null || segment == end_node :
@@ -157,8 +161,14 @@ func arm_grapple():
 func anchor_rope_at_location(location: Vector2):
 	end_node.top_level = true
 	end_node.global_position = location
-	set_deferred("freeze", true)
+	end_node.set_deferred("freeze", true)
 	pass
+	
+func hold_grapple(): 
+	var pos = end_node.global_position
+	end_node.top_level = false
+	end_node.global_position = pos
+	end_node.set_deferred("freeze", true)
 
 func move_base_to_top():
 	base_node.global_position = first_segment.previous_segment.previous_segment.global_position

@@ -56,9 +56,12 @@ func _ready() :
 	
 func reset() :
 	
+	var player : PlayerBody = get_parent() 
 	print("RESET")
 	
-	get_parent().position = spawn_point.global_position
+	player.state.switch_state(player, PlayerState.standing_state)
+	
+	player.position = spawn_point.global_position
 	var bone_instance = bone_pile_scene.instantiate()
 	add_child(bone_instance)
 	bone_instance.player_state = self
@@ -76,6 +79,7 @@ func reset() :
 	update_bone_listeners()
 
 	grace_period = false
+	
 	
 	
 func damage(dmg : int) :
