@@ -1,9 +1,10 @@
-[gd_scene load_steps=138 format=3 uid="uid://ugk6rwjjxr6a"]
+[gd_scene load_steps=131 format=3 uid="uid://ugk6rwjjxr6a"]
 
 [ext_resource type="Script" uid="uid://c1783raji43ur" path="res://Scripts/Player/PlayerBody.gd" id="1_0gysh"]
 [ext_resource type="Script" uid="uid://dlk5fsh4rsiay" path="res://Scripts/physics/rope_base.gd" id="2_vfarp"]
 [ext_resource type="Texture2D" uid="uid://nh4ey2muxt0w" path="res://Sprites/icon.svg" id="3_y6uwr"]
 [ext_resource type="Script" uid="uid://bf63ll8plwgiy" path="res://Scripts/Player/character_data.gd" id="4_83xs0"]
+[ext_resource type="Texture2D" uid="uid://co02ja3mcsl4u" path="res://Sprites/Lizard/32_crouch_sheet.png" id="5_vfarp"]
 [ext_resource type="Texture2D" uid="uid://c1wm6jmnkpvbe" path="res://Sprites/Lizard/sheet_land_death.png" id="5_ypfnu"]
 [ext_resource type="Texture2D" uid="uid://dqn0a8gdxlo57" path="res://Sprites/Lizard/sheet_idle.png" id="6_xuaoq"]
 [ext_resource type="Texture2D" uid="uid://uayvheywufp0" path="res://Sprites/Lizard/sheet_hard_fall.png" id="7_wohnl"]
@@ -12,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://ba824lbcipb72" path="res://Sprites/Lizard/sheet_jump.png" id="10_nv4vc"]
 [ext_resource type="Texture2D" uid="uid://oraudjkg2cuk" path="res://Sprites/Lizard/sheet_manteling.png" id="11_8gxox"]
 [ext_resource type="Texture2D" uid="uid://c6ymbyhjgp764" path="res://Sprites/Lizard/sheet_run.png" id="12_11gg7"]
-[ext_resource type="Texture2D" uid="uid://5px6c1llsvl7" path="res://Sprites/Lizard/32_BH_Walk_Strip_10.png" id="13_qpa8y"]
 [ext_resource type="Script" uid="uid://cndmk2b4wk5sw" path="res://Scripts/Player/animation_state.gd" id="14_sbwqj"]
 [ext_resource type="Script" uid="uid://c37xlp6o00fun" path="res://Scripts/Player/camera_controller.gd" id="15_xwi16"]
 [ext_resource type="Script" uid="uid://2u0lh7refvov" path="res://Scripts/Player/ladder_spawn.gd" id="16_sweqm"]
@@ -34,8 +34,16 @@ height = 28.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwvnk"]
 size = Vector2(12, 21)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5wm8"]
-atlas = ExtResource("13_qpa8y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypfnu"]
+atlas = ExtResource("5_vfarp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83xs0"]
+atlas = ExtResource("5_vfarp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6uwr"]
+atlas = ExtResource("5_vfarp")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8vh3"]
@@ -374,51 +382,21 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("10_nv4vc")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tghma"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ybcah"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iegcx"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hermc"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3tli"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_picxg"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7kou5"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pikju"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_50t7c"]
-atlas = ExtResource("13_qpa8y")
-region = Rect2(288, 0, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_yb2ig"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l5wm8")
+"texture": SubResource("AtlasTexture_ypfnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83xs0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6uwr")
 }],
-"loop": true,
+"loop": false,
 "name": &"crouch",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -557,7 +535,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -719,34 +697,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l5wm8")
+"texture": SubResource("AtlasTexture_vtx38")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tghma")
+"texture": SubResource("AtlasTexture_ibyrt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ybcah")
+"texture": SubResource("AtlasTexture_l2p4i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iegcx")
+"texture": SubResource("AtlasTexture_3emsu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hermc")
+"texture": SubResource("AtlasTexture_3v8il")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x3tli")
+"texture": SubResource("AtlasTexture_jomya")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_picxg")
+"texture": SubResource("AtlasTexture_634s8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7kou5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pikju")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_50t7c")
+"texture": SubResource("AtlasTexture_a4o67")
 }],
 "loop": true,
 "name": &"walk",
@@ -845,6 +817,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 8
+floor_snap_length = 2.0
 script = ExtResource("1_0gysh")
 SPEED = 45
 BASE_JUMP_VELOCITY = -80
@@ -887,9 +860,7 @@ shape = SubResource("RectangleShape2D_cwvnk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_yb2ig")
-animation = &"mantel"
-frame = 8
-frame_progress = 1.0
+animation = &"walk"
 script = ExtResource("14_sbwqj")
 
 [node name="MantleTeleportLocation" type="Node2D" parent="."]
